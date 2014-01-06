@@ -1,6 +1,7 @@
 package view;
 
 import control.LoginListener;
+import control.Parser;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -17,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import model.Game;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -37,9 +39,13 @@ public class LogIn extends JPanel
     private final Enumb main;
     private final JLayeredPane jPane;
     private BufferedImage buttonIcon;
+    private Parser par;
+    private Game game;
 
     public LogIn(Enumb jf) throws IOException
     {
+        par = new Parser();
+        game = new Game();
 
         //new Labels
         JLabel background = new JLabel(new ImageIcon("images\\background2new.png"));

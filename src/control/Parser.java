@@ -5,6 +5,7 @@
 package control;
 
 import java.util.Scanner;
+import model.Game;
 
 /**
  *
@@ -13,9 +14,16 @@ import java.util.Scanner;
 public class Parser
 {
 
+    private Game game;
+
     public Parser()
     {
+        game = new Game();
+    }
 
+    public void getUserList()
+    {
+        game.getUserList();
     }
 
     public String validateUserInput(String word)
