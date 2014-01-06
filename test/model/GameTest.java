@@ -8,6 +8,8 @@ package model;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -53,7 +55,7 @@ public class GameTest
     {
 
         String[] result = game.getUserList();
-        String expResult = "adriasn ronsten";
+        String expResult = "adrian ronsten";
 
         assertEquals(expResult, result[0]);
     }
@@ -68,6 +70,55 @@ public class GameTest
 
         assertEquals(expResult, result.getUsername());
 
+    }
+
+    @Test
+    public void testMatchingPassword()
+    {
+
+        assertTrue(game.checkPassword("adrian ronsten", "lol"));
+
+    }
+
+    @Test
+    public void testAddingNewUser()
+    {
+
+        game.addNewUser("kalle", "stropp", "12345", "12345");
+
+        assertNotNull(game.getUser("kalle stropp"));
+
+    }
+
+    @Test
+    public void testCreateWordList()
+    {
+
+        String[] words = new String[]
+        {
+
+            "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat",
+            "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat",
+        };
+
+        game.createWordList("vecka 1", "engelska", words);
+
+        assertNotNull(game.getWordList("vecka 1"));
+
+    }
+    
+    @Test
+    public void testGettingListOfWordfiles(){
+        
+        assertNotNull(game.getListOfWordfiles());
+        
+    }
+    
+    @Test
+    public void testGettingListOfLangauges(){
+        
+        //assertNotNull(game.getListOfLanguages());
+        
     }
 
 }

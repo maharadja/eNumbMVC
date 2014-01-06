@@ -26,11 +26,12 @@ public class UserList
     {
         userlist.add(new User(s[0], s[1], s[2]));
     }
-    
-    public void addUser(User user){
-        
+
+    public void addUser(User user)
+    {
+
         userlist.add(user);
-        
+
     }
 
     public int getSize()
@@ -43,11 +44,14 @@ public class UserList
         int index = i;
         return userlist.get(index);
     }
-    
-    public User getUser(String s){
-        
-        for( User u : userlist ){
-            if(u.getUsername().equals(s)){
+
+    public User getUser(String s)
+    {
+
+        for (User u : userlist)
+        {
+            if (u.getUsername().equals(s))
+            {
                 return u;
             }
         }
@@ -76,7 +80,7 @@ public class UserList
         {
             listOfNames[i] = tempList.get(i);
         }
-        System.out.println(listOfNames[0]);
+        // System.out.println(listOfNames[0]);
 
         return listOfNames;
     }

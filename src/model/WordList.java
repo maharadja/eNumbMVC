@@ -3,60 +3,65 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  *
  * @author Felix
  */
-public class WordList {
-    
+public class WordList
+{
+
     private ArrayList<Word> words;
     private String fileName;
-    
-    public WordList(String name){
+
+    public WordList(String name)
+    {
         words = new ArrayList<Word>();
         fileName = name;
     }
-    
-    void addNewWord(String sw, String fw, String lang) {
+
+    void addNewWord(String sw, String fw, String lang)
+    {
         Word temp = new Word(sw, fw, lang);
         words.add(temp);
-        
+
     }
 
-    public String[] getWord(int i) {
-        
+    public String[] getWord(int i)
+    {
+
         //for(Word w : words){
         //    if(w.getSwed().equals(s) || w.getFor().equals(s)){
         //        return w.toStringArray();
         //    }
-       // }
+        // }
         return words.get(i).toStringArray();
     }
 
-    public int getListSize() {
+    public int getListSize()
+    {
         return words.size();
     }
 
-    void removeWord(int i) {
-        
+    void removeWord(int i)
+    {
+
         words.remove(i);
     }
-    
-    public String getLang(){
-        
+
+    public String getLang()
+    {
+
         return words.get(0).getLang();
     }
 
-    
-    public String getName(){
-        
+    public String getName()
+    {
+
         return fileName;
     }
-    
-    
+
 }

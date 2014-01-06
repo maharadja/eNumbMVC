@@ -40,9 +40,18 @@ public class UserListTest
     public void setUp()
     {
         userlist = new UserList();
-        userlist.addUser(new String[]{"adrian", "ronsten", "1234"});
-        userlist.addUser(new String[]{"viktor", "zetterberg", "abcd"});
-        userlist.addUser(new String[]{"magnus", "juto", "5678"});
+        userlist.addUser(new String[]
+        {
+            "adrian", "ronsten", "1234"
+        });
+        userlist.addUser(new String[]
+        {
+            "viktor", "zetterberg", "abcd"
+        });
+        userlist.addUser(new String[]
+        {
+            "magnus", "juto", "5678"
+        });
 
     }
 
@@ -54,7 +63,10 @@ public class UserListTest
     @Test
     public void testAddUser()
     {
-        userlist.addUser(new String[]{"zlatan", "ibrahimovic", "0987"});
+        userlist.addUser(new String[]
+        {
+            "zlatan", "ibrahimovic", "0987"
+        });
         String expResult = "zlatan ibrahimovic";
         String result = userlist.getUser(3).getUsername();
         assertEquals(expResult, result);
@@ -74,9 +86,18 @@ public class UserListTest
     {
 
         userlist = new UserList();
-        userlist.addUser(new String[]{"adrian", "ronsten", "1234"});
-        userlist.addUser(new String[]{"viktor", "zetterberg", "abcd"});
-        userlist.addUser(new String[]{"magnus", "juto", "5678"});
+        userlist.addUser(new String[]
+        {
+            "adrian", "ronsten", "1234"
+        });
+        userlist.addUser(new String[]
+        {
+            "viktor", "zetterberg", "abcd"
+        });
+        userlist.addUser(new String[]
+        {
+            "magnus", "juto", "5678"
+        });
 
         String[] expResult = new String[]
         {

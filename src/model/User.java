@@ -23,13 +23,13 @@ public class User
         this.password = password;
         this.username = firstname + " " + lastname;
     }
-    
+
     public User(String[] s)
     {
         firstname = s[0];
         lastname = s[1];
         password = s[2];
-        username = s[0] + s[1];
+        username = s[0] + " " + s[1];
     }
 
     public String getfirstname()

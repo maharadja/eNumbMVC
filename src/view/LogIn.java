@@ -1,5 +1,6 @@
 package view;
 
+import control.GetHandler;
 import control.LoginListener;
 import control.Parser;
 import java.awt.Color;
@@ -108,12 +109,22 @@ public class LogIn extends JPanel
 
         //Adding items to the username comboBox. Just for show right now...
         name.addItem("Välj användare");
-        name.addItem("Svenne");
-        name.addItem("Gundeman");
-        name.addItem("Jesus");
-        name.addItem("Bogdan");
-        name.addItem("Mögel-Bert");
 
+        GetHandler handler = new GetHandler();
+        String[] temp = handler.getUserList();
+
+        for (int i = 0; i < temp.length; i++)
+        {
+            name.addItem(temp[i]);
+        }
+
+        /*
+         name.addItem("Svenne");
+         name.addItem("Gundeman");
+         name.addItem("Jesus");
+         name.addItem("Bogdan");
+         name.addItem("Mögel-Bert");
+         */
         //Adding stuff to the LayeredPane
         jPane.add(background, new Integer(1));
         jPane.add(logIn, new Integer(2));

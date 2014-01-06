@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import view.AddNewLanguage;
 import view.Enumb;
 import view.MenuHelp;
 
@@ -65,7 +66,7 @@ public class MenuListener implements ActionListener
 
         if (choice == addNewLanguage)
         {
-            //main.goFromMenu();
+            AddNewLanguage.display();
         }
         else if (choice == quit)
         {

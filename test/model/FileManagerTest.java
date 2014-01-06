@@ -5,10 +5,6 @@
  */
 package model;
 
-import model.UserList;
-import model.FileManager;
-import model.WordList;
-import model.User;
 import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,13 +13,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 /**
  *
  * @author kevin
  */
 public class FileManagerTest
 {
+
     FileManager fm;
 
     public FileManagerTest()
@@ -54,63 +50,98 @@ public class FileManagerTest
     @Test
     public void testReadWordFile()
     {
-       WordList words = fm.readWordFile("words1.txt");
-       
-       String result = words.getLang();
-       String expResult = "engelska";
-       
+        WordList words = fm.readWordFile("words1");
+
+        String result = words.getLang();
+        String expResult = "engelska";
+
         Assert.assertEquals(expResult, result);
-       
+
     }
-    
+
     @Test
-    public void testWriteWordListFile(){
-        
+    public void testWriteWordListFile()
+    {
+
         WordList wl = new WordList("hund");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++)
+        {
             wl.addNewWord("hund", "dog", "engelska");
         }
-                
+
         fm.writeWordFile(wl);
-        
-        File result = new File("hund.txt");
-        
+
+        File result = new File("data\\words\\hund.txt");
+
         Assert.assertTrue("lol", result.exists());
-        
+
     }
-    
+
     @Test
-    public void testReadUserFile(){
-        
+    public void testReadUserFile()
+    {
+
         UserList result = fm.readUserFiles();
-        String[] expResult = new String[]{"adrian", "ronsten", "lol"};
+        String[] expResult = new String[]
+        {
+            "adrian", "ronsten", "lol"
+        };
         Assert.assertEquals(expResult[0], result.getUser(0).getfirstname());
         Assert.assertEquals(expResult[1], result.getUser(0).getlastname());
         Assert.assertEquals(expResult[2], result.getUser(0).getPassword());
     }
-    
+
     @Test
-    public void testWriteUserFile(){
-        
+    public void testWriteUserFile()
+    {
+
         User user = new User("viktor", "zetterberg", "korvkalas");
         user.setHighscore(2000);
         fm.writeUserFile(user);
-        
-        File result = new File("viktor zetterberg.txt");
-        
+
+        File result = new File("data\\users\\viktor zetterberg.txt");
+
         Assert.assertTrue("lol", result.exists());
-        
+
     }
-    
+
     @Test
-    public void testRemovingFile(){
-        
-        fm.removeFile("viktor zetterberg");
-        
-        File result = new File("viktor zetterberg.txt");
-        
+    public void testRemovingFile()
+    {
+
+        fm.removeUserFile("viktor zetterberg");
+
+        File result = new File("data\\users\\viktor zetterberg.txt");
+
         Assert.assertFalse("lol", result.exists());
     }
-            
+
+    @Test
+    public void testGetListofWordFiles()
+    {
+
+        String[] expResult = new String[]
+        {
+            "hund", "vecka 1", "words", "words1"
+        };
+
+        String[] result = fm.getListOfWordSections("filename");
+        System.out.println(result[0] + result[1] + result[2] + result[3]);
+        Assert.assertArrayEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testGetListOfLanguages()
+    {
+
+        String expResult = "engelska";
+
+        String[] langs = fm.getListOfWordSections("language");
+
+        String result = langs[0];
+
+        Assert.assertEquals(expResult, result);
+    }
 
 }

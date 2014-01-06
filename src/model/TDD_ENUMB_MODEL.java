@@ -5,7 +5,7 @@
  */
 package model;
 
-import control.Parser;
+import control.GetHandler;
 import java.io.IOException;
 
 /**
@@ -21,8 +21,8 @@ public class TDD_ENUMB_MODEL
     public static void main(String[] args) throws IOException
     {
 
-        Parser parser = new Parser();
-        parser.validateUserInput("ABCD");
+        GetHandler handle = new GetHandler();
+        handle.getUserList();
 
     }
 
