@@ -115,33 +115,30 @@ public class FileManagerTest
 
         Assert.assertFalse("lol", result.exists());
     }
-
+    
     @Test
-    public void testGetListofWordFiles()
-    {
-
-        String[] expResult = new String[]
-        {
-            "hund", "vecka 1", "words", "words1"
-        };
-
+    public void testGetListofWordFiles(){
+    
+        String[] expResult = new String[]{"hund", "vecka 1", "words", "words1"};
+        
         String[] result = fm.getListOfWordSections("filename");
-        System.out.println(result[0] + result[1] + result[2] + result[3]);
+        System.out.println(result[0]+result[1]+result[2]+result[3]);
         Assert.assertArrayEquals(expResult, result);
-
+        
     }
-
+    
     @Test
-    public void testGetListOfLanguages()
-    {
-
+    public void testGetListOfLanguages(){
+        
         String expResult = "engelska";
-
+        
         String[] langs = fm.getListOfWordSections("language");
-
+        
         String result = langs[0];
-
+        
         Assert.assertEquals(expResult, result);
     }
 
+
+    
 }

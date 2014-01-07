@@ -5,6 +5,7 @@
  */
 package view;
 
+import control.SignupListener;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -52,7 +53,8 @@ public class SignUp
             String pass = password.getText();
             String pass2 = password_2.getText();
 
-            System.out.println(first + " " + last);
+            SignupListener listener = new SignupListener(first, last, pass, pass2);
+
         }
         else
         {

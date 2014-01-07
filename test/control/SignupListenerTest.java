@@ -38,7 +38,7 @@ public class SignupListenerTest
     @Before
     public void setUp()
     {
-        sl = new SignupListener();
+
     }
 
     @After

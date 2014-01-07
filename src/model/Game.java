@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.*;
+
 /**
  *
  * @author Felix
@@ -114,8 +116,7 @@ public class Game
             {
                 fName, lName, pw1
             });
-            System.out.println(newUser);
-
+            ul.addUser(newUser);
             fm.writeUserFile(newUser);
             return true;
         }
@@ -148,16 +149,23 @@ public class Game
         return fm.readWordFile(fileName);
 
     }
-
-    public String[] getListOfWordfiles()
-    {
-
+    
+    public String[] getListOfWordfiles(){
+      
         return fm.getListOfWordSections("filename");
-
+        
     }
-
+    
     //public String[] getListOfLanguages(){
+        
     //    int index = 0;
+      
     //    String[] langs =  fm.getListOfWordSections("language");
+        
+       
+        
+        
+        
     // }
+
 }

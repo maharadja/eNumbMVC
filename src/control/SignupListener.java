@@ -31,11 +31,6 @@ public class SignupListener
         System.out.println(lastName);
     }
 
-    public SignupListener()
-    {
-
-    }
-
     public void addNewUser(String firstName, String lastName, String password, String passwordRetype)
     {
         game.addNewUser(firstName, lastName, password, password);
