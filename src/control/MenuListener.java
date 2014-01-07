@@ -25,11 +25,11 @@ public class MenuListener implements ActionListener
 
     private JComboBox<ImageIcon> chooseLanguage;
     private JButton addNewLanguage, help, quit, next, logOut;
-    private JPanel container, containerW, containerE;
+    private JPanel container, containerW, containerE, topLine;
     private JLabel topHeading, flagText;
     private Enumb main;
 
-    public MenuListener(JComboBox<ImageIcon> chooseLanguage, JButton addNewLanguage, JButton help, JButton quit, JButton next, JButton logOut, JPanel container, JPanel containerW, JPanel containerE, JLabel topHeading, JLabel flagText, Enumb main)
+    public MenuListener(JComboBox<ImageIcon> chooseLanguage, JButton addNewLanguage, JButton help, JButton quit, JButton next, JButton logOut, JPanel container, JPanel containerW, JPanel containerE, JPanel topLine, JLabel topHeading, JLabel flagText, Enumb main)
     {
         this.chooseLanguage = chooseLanguage;
         this.addNewLanguage = addNewLanguage;

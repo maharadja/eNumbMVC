@@ -6,6 +6,7 @@
 package view;
 
 import control.ChosenLanguageListener;
+import control.GetHandler;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -62,9 +63,18 @@ public class ChosenLanguage extends JPanel
         section.setBackground(new Color(255, 255, 255));
 
         //Adding to ComboBox
-        section.addItem("Vecka 1");
-        section.addItem("Vecka 2");
-        section.addItem("Vecka 3");
+        GetHandler handler = new GetHandler();
+        String[] temp = handler.getWordList();
+
+        for (int i = 0; i < temp.length; i++)
+        {
+            section.addItem(temp[i]);
+        }
+        /*
+         section.addItem("Vecka 1");
+         section.addItem("Vecka 2");
+         section.addItem("Vecka 3");
+         */
 
         //Addings
         container.add(chooseWeekText);
