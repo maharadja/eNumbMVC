@@ -22,21 +22,21 @@ public class GameRunListener implements ActionListener
 {
 
     private Enumb main;
-    private JButton help, menu;
+    private JButton help, menu, fulKnappSomTasBort;
     private JPanel leftPanel, rightPanel, mainContainer, emptyRightPanel, emptyLeftPanel, emptyBottomPanel;
     private JLabel topLabel;
     private JTextField wordToTranslate, translateField, correctNumbersField;
     private JProgressBar progressBar;
     private int wordNumber, correctNumbers;
 
-    public GameRunListener(Enumb main, JButton help, JButton menu, JPanel leftPanel, JPanel rightPanel, JPanel mainContainer, JPanel emptyRightPanel, JPanel emptyLeftPanel, JPanel emptyBottomPanel, JLabel topLabel, JTextField wordToTranslate, JTextField translateField, JTextField correctNumbersField, JProgressBar progressBar, int wordNumber, int correctNumbers)
+    public GameRunListener(Enumb main, JButton help, JButton menu, JButton fulKnappSomTasBort, JPanel leftPanel, JPanel rightPanel, JPanel emptyRightPanel, JPanel emptyLeftPanel, JPanel emptyBottomPanel, JLabel topLabel, JTextField wordToTranslate, JTextField translateField, JTextField correctNumbersField, JProgressBar progressBar, int wordNumber, int correctNumbers)
     {
         this.main = main;
         this.help = help;
         this.menu = menu;
+        this.fulKnappSomTasBort = fulKnappSomTasBort;
         this.leftPanel = leftPanel;
         this.rightPanel = rightPanel;
-        this.mainContainer = mainContainer;
         this.emptyRightPanel = emptyRightPanel;
         this.emptyLeftPanel = emptyLeftPanel;
         this.emptyBottomPanel = emptyBottomPanel;
@@ -65,6 +65,9 @@ public class GameRunListener implements ActionListener
         else if (choice == menu)
         {
             main.goFromLogin();
+        }
+        else if (choice == fulKnappSomTasBort){
+            main.goFromGameRunToResult();
         }
     }
 

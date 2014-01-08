@@ -26,12 +26,12 @@ public class LoginListener implements ActionListener
     private final JComboBox<String> name;
     private final JLabel whatName, whatPassword;
     private final JPasswordField password;
-    private final JButton logIn, newUser, exitButton;
+    private final JButton logIn, newUser;
     private final Enumb main;
     private final JLayeredPane jPane;
     private BufferedImage buttonIcon;
 
-    public LoginListener(JComboBox<String> name, JLabel whatName, JLabel whatPassword, JPasswordField password, JButton logIn, JButton newUser, JButton exitButton, Enumb main, JLayeredPane jPane)
+    public LoginListener(JComboBox<String> name, JLabel whatName, JLabel whatPassword, JPasswordField password, JButton logIn, JButton newUser, Enumb main, JLayeredPane jPane)
     {
         this.name = name;
         this.whatName = whatName;
@@ -39,7 +39,6 @@ public class LoginListener implements ActionListener
         this.password = password;
         this.logIn = logIn;
         this.newUser = newUser;
-        this.exitButton = exitButton;
         this.main = main;
         this.jPane = jPane;
     }
@@ -61,10 +60,6 @@ public class LoginListener implements ActionListener
         {
             SignUp.display();
 
-        }
-        else if (choice == exitButton)
-        {
-            System.exit(0);
         }
     }
 }

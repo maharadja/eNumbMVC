@@ -32,14 +32,13 @@ public final class Enumb extends JFrame
     ChosenLanguage chosenLanguage;
     LevelOfDifficulty levelOfDifficulty;
     GameRun gameRun;
-    //AddNewLanguage addNewLanguage;
+    Result result;
 
     public Enumb() throws IOException
     {
 
         //new Panels
         cont = new JPanel();
-        test = new JPanel();
 
         //new Layouts
         cl = new CardLayout();
@@ -48,23 +47,24 @@ public final class Enumb extends JFrame
         menu = new Menu(this);
         chosenLanguage = new ChosenLanguage(this);
         levelOfDifficulty = new LevelOfDifficulty(this);
-        gameRun = new GameRun(this);
+        gameRun = new GameRun(this,2);
+        result = new Result();
+        
         //addNewLanguage = new AddNewLanguage(this);
-
+        JFrame();
         //layout settings.
         cont.setLayout(cl);
-
+        
         //addings.
         cont.add(login, "1");
         cont.add(menu, "2");
         cont.add(chosenLanguage, "3");
         cont.add(levelOfDifficulty, "4");
-        cont.add(gameRun, "5");
-        //cont.add(addNewLanguage, "3");
+        cont.add(result, "6");
         add(cont);//adding to extended JFrame
 
         cl.show(cont, "1");
-        JFrame();
+        
 
     }
 
@@ -74,7 +74,6 @@ public final class Enumb extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setPreferredSize(new Dimension(512, 690));
-
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -91,8 +90,8 @@ public final class Enumb extends JFrame
     public void goFromLogin()
     {
         cl.show(cont, "2");
-        setPreferredSize(new Dimension(1300, 900));
-        //menu.updateUI();
+        setPreferredSize(new Dimension(1330, 900));
+        menu.updateUI();
         pack();
         setLocationRelativeTo(null);
     }
@@ -100,7 +99,7 @@ public final class Enumb extends JFrame
     public void goFromMenuToChosenLanguage()
     {
         cl.show(cont, "3");
-        setPreferredSize(new Dimension(1300, 900));
+        setPreferredSize(new Dimension(1330, 900));
         chosenLanguage.updateUI();
         pack();
         setLocationRelativeTo(null);
@@ -109,19 +108,30 @@ public final class Enumb extends JFrame
     public void goFromChosenLanguageToDifficulty()
     {
         cl.show(cont, "4");
-        setPreferredSize(new Dimension(1300, 900));
+        setPreferredSize(new Dimension(1330, 900));
         levelOfDifficulty.updateUI();
         pack();
         setLocationRelativeTo(null);
     }
 
-    public void goFromDifficultyToRunGame()
+    public void goFromDifficultyToRunGame(int i)
     {
+        gameRun = new GameRun(this, i);
+        cont.add(gameRun, "5");
         cl.show(cont, "5");
-        setPreferredSize(new Dimension(1300, 900));
+        setPreferredSize(new Dimension(1330, 900));
         gameRun.updateUI();
         pack();
         setLocationRelativeTo(null);
+    }
+    
+    public void goFromGameRunToResult(){
+    cl.show(cont, "6");
+    setPreferredSize(new Dimension(1330, 900));
+    result.updateUI();
+    pack();
+    setLocationRelativeTo(null);
+
     }
 
     public void logOutUser()

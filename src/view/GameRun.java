@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -26,25 +28,23 @@ import javax.swing.border.TitledBorder;
  *
  * @author Viktor
  */
-public class GameRun extends JPanel
-{
+public class GameRun extends JPanel {
 
     private Enumb main;
-    private JButton help, menu;
-    private JPanel leftPanel, rightPanel, mainContainer, emptyRightPanel, emptyLeftPanel, emptyBottomPanel;
-    private JLabel topLabel;
+    private JButton help, menu, choiceNr1, choiceNr2, choiceNr3, choiceNr4,fulKnappSomTasBort;
+    private JPanel leftPanel, rightPanel, emptyRightPanel, emptyLeftPanel, emptyBottomPanel;
+    private JLabel topLabel, choiceButtonLabel;
     private JTextField wordToTranslate, translateField, correctNumbersField;
     private JProgressBar progressBar;
     private int wordNumber, correctNumbers;
 
-    public GameRun(Enumb jf)
-    {
-
+    public GameRun(Enumb jf, int level) {
+        
         //new Labels
         topLabel = new JLabel();
+        choiceButtonLabel = new JLabel();
 
         //new Panels
-        mainContainer = new JPanel(new BorderLayout()); //Main container holds left and right panels.
         leftPanel = new JPanel(); // Left panel holds wordToTranslate field and translateField.
         rightPanel = new JPanel(); // Right panel holds progressbar, "correct number"-field and help-menu buttons.
         emptyRightPanel = new JPanel(); //Empty panels to to fill west, east and bottom borderLayout.
@@ -59,42 +59,52 @@ public class GameRun extends JPanel
         //new Buttons
         help = new JButton("Hjälp");
         menu = new JButton("Meny");
+        choiceNr1 = new JButton("Alternativ 1");
+        choiceNr2 = new JButton("Alternativ 2");
+        choiceNr3 = new JButton("Alternativ 3");
+        choiceNr4 = new JButton("Alternativ 4");
+        fulKnappSomTasBort = new JButton("TAS BORT");
 
+        
         main = jf;
-
+        
         //GameRunListener
-        GameRunListener listener = new GameRunListener(main, help, menu, leftPanel, rightPanel, mainContainer, emptyRightPanel, emptyLeftPanel, emptyBottomPanel, topLabel, wordToTranslate, translateField, correctNumbersField, progressBar, wordNumber, correctNumbers);
+        GameRunListener listener = new GameRunListener(main, help, menu, fulKnappSomTasBort, leftPanel, rightPanel, emptyRightPanel, emptyLeftPanel, emptyBottomPanel, topLabel, wordToTranslate, translateField, correctNumbersField, progressBar, wordNumber, correctNumbers);
 
         //Adding ActionListeners
         help.addActionListener(listener);
         menu.addActionListener(listener);
+        fulKnappSomTasBort.addActionListener(listener);
 
         //new Progressbars
         progressBar = new JProgressBar(0, 10);
 
         //Layout settings.
         setLayout(new BorderLayout());
+        choiceButtonLabel.setLayout(new FlowLayout());
         leftPanel.setLayout(new FlowLayout());
         rightPanel.setLayout(new FlowLayout());
 
-        //set Size
-        leftPanel.setPreferredSize(new Dimension(500, 500));
-        translateField.setPreferredSize(new Dimension(500, 50));
-        wordToTranslate.setPreferredSize(new Dimension(500, 50));
-        rightPanel.setPreferredSize(new Dimension(500, 500));
-        progressBar.setPreferredSize(new Dimension(450, 50));
+        //Size settings
+        setPreferredSize(new Dimension(1290,890));
+        choiceNr1.setPreferredSize(new Dimension(200,50));
+        choiceNr2.setPreferredSize(new Dimension(200,50));
+        choiceNr3.setPreferredSize(new Dimension(200,50));
+        choiceNr4.setPreferredSize(new Dimension(200,50));
+        choiceButtonLabel.setPreferredSize(new Dimension(700,500));
+        topLabel.setPreferredSize(new Dimension(700,50));
+        topLabel.setBorder(new TitledBorder(""));
+        emptyLeftPanel.setPreferredSize(new Dimension(150,900));
+        leftPanel.setPreferredSize(new Dimension(500, 900));
+        rightPanel.setPreferredSize(new Dimension(250, 900));
+        translateField.setPreferredSize(new Dimension(700, 50));
+        wordToTranslate.setPreferredSize(new Dimension(700, 50));
+        progressBar.setPreferredSize(new Dimension(245, 50));
         correctNumbersField.setPreferredSize(new Dimension(80, 40));
-        mainContainer.setPreferredSize(new Dimension(1000, 500));
 
         //background settings.
-        setBackground(Color.WHITE);
-        leftPanel.setBackground(Color.WHITE);
         wordToTranslate.setBackground(Color.WHITE);
         correctNumbersField.setBackground(Color.WHITE);
-        mainContainer.setBackground(Color.WHITE);
-        emptyRightPanel.setBackground(Color.WHITE);
-        emptyLeftPanel.setBackground(Color.WHITE);
-        emptyBottomPanel.setBackground(Color.WHITE);
 
         //Border settings
         wordToTranslate.setBorder(new TitledBorder("Översätt ordet:"));
@@ -103,6 +113,8 @@ public class GameRun extends JPanel
         progressBar.setBorder(new TitledBorder("Tid kvar:"));
         correctNumbersField.setBorder(new TitledBorder("Antal rätt:"));
 
+       
+        
         wordNumber = 5; // Bara som ett visningsexempel för tillfället.
         correctNumbers = 8; // Bara som ett visningsexempel för tillfället.
 
@@ -116,14 +128,39 @@ public class GameRun extends JPanel
         correctNumbersField.setEditable(false);
 
         //Addings.
-        emptyRightPanel.add(Box.createRigidArea(new Dimension(30, 160)));
-        emptyLeftPanel.add(Box.createRigidArea(new Dimension(30, 160)));
-        emptyBottomPanel.add(Box.createRigidArea(new Dimension(30, 60)));
 
+        choiceButtonLabel.add(Box.createRigidArea(new Dimension(500,50)));
+        choiceButtonLabel.add(choiceNr1);
+        choiceButtonLabel.add(Box.createRigidArea(new Dimension(60,90)));
+        choiceButtonLabel.add(choiceNr2);
+        choiceButtonLabel.add(Box.createRigidArea(new Dimension(60,40)));
+        choiceButtonLabel.add(choiceNr3);
+        choiceButtonLabel.add(Box.createRigidArea(new Dimension(60,40)));
+        choiceButtonLabel.add(choiceNr4);
+        choiceButtonLabel.add(Box.createRigidArea(new Dimension(60,40)));
+        
+        leftPanel.add(Box.createRigidArea(new Dimension(300, 60)));
+        leftPanel.add(topLabel);
         leftPanel.add(Box.createRigidArea(new Dimension(300, 160)));
         leftPanel.add(wordToTranslate);
         leftPanel.add(Box.createRigidArea(new Dimension(300, 160)));
         leftPanel.add(translateField);
+
+        //Adds or removes components in GameRun panel(Don't you dare move it from this place!)
+        if (level == 0) {
+            leftPanel.add(choiceButtonLabel);
+            progressBar.setVisible(false);
+            translateField.setVisible(false);
+            updateUI();
+            
+        } else if (level == 1) {
+            leftPanel.add(choiceButtonLabel);
+            translateField.setVisible(false);
+            updateUI();
+            
+        } else if (level == 2) {
+            updateUI();
+        }
 
         rightPanel.add(Box.createRigidArea(new Dimension(500, 160)));
         rightPanel.add(progressBar);
@@ -132,16 +169,19 @@ public class GameRun extends JPanel
         rightPanel.add(Box.createRigidArea(new Dimension(500, 160)));
         rightPanel.add(help);
         rightPanel.add(menu);
+        rightPanel.add(fulKnappSomTasBort);
 
-        mainContainer.add(leftPanel, BorderLayout.WEST);
-        mainContainer.add(rightPanel, BorderLayout.EAST);
-
-        add(topLabel, BorderLayout.PAGE_START);
-        add(mainContainer, BorderLayout.CENTER);
-        add(emptyLeftPanel, BorderLayout.WEST);
-        add(emptyRightPanel, BorderLayout.EAST);
-        add(emptyBottomPanel, BorderLayout.SOUTH);
+        
+        add(rightPanel, BorderLayout.LINE_END);
+        add(leftPanel, BorderLayout.CENTER);
+        add(emptyLeftPanel, BorderLayout.LINE_START);
+        
 
     }
+
+    
+        
+        
+    
 
 }

@@ -27,7 +27,7 @@ public class Menu extends JPanel
 
     private JComboBox<ImageIcon> chooseLanguage;
     private JButton addNewLanguage, help, quit, next, logOut;
-    private JPanel container, containerW, containerE, topLine;
+    private JPanel  containerW, containerE, topLine;
     private JLabel topHeading, flagText;
     private Enumb main;
 
@@ -35,13 +35,12 @@ public class Menu extends JPanel
     {
 
         //new Panels
-        container = new JPanel();
         containerE = new JPanel();
         containerW = new JPanel();
         topLine = new JPanel();
 
         //new Labels
-        topHeading = new JLabel(new ImageIcon("images\\menuBackground.png"));
+        topHeading = new JLabel(new ImageIcon("images\\globe5.png"));
         flagText = new JLabel();
 
         //new Buttons
@@ -60,13 +59,14 @@ public class Menu extends JPanel
         main = jf;
 
         //MenuListern
-        MenuListener listener = new MenuListener(chooseLanguage, addNewLanguage, help, quit, next, logOut, container, containerW, containerE, topLine, topHeading, flagText, main);
-
+        MenuListener listener = new MenuListener(chooseLanguage, addNewLanguage, help, quit, next, logOut, containerW, containerE, topLine, topHeading, flagText, main);
+        
+        //container.setVisible(false);
         //Size settings.
-        container.setPreferredSize(new Dimension(1300, 900));
+        setPreferredSize(new Dimension(1290,890));
         containerE.setPreferredSize(new Dimension(250, 900));
         containerW.setPreferredSize(new Dimension(250, 900));
-        topLine.setPreferredSize(new Dimension(1000, 2));
+        topLine.setPreferredSize(new Dimension(1000, 25));
         flagText.setPreferredSize(new Dimension(100, 60));
         chooseLanguage.setPreferredSize(new Dimension(90, 60));
         addNewLanguage.setPreferredSize(new Dimension(200, 40));
@@ -74,13 +74,10 @@ public class Menu extends JPanel
         quit.setPreferredSize(new Dimension(200, 40));
         next.setPreferredSize(new Dimension(200, 40));
         logOut.setPreferredSize(new Dimension(200, 40));
-
+        
         //Background settings.
-        setBackground(new Color(235, 235, 235));
-        container.setBackground(new Color(15, 161, 163));
-        containerE.setBackground(new Color(163, 42, 15));
-        containerW.setBackground(new Color(240, 90, 40));
-        topLine.setBackground(Color.BLACK);
+        containerE.setBackground(new Color(17, 54, 56));
+        containerW.setBackground(new Color(184, 101, 0));
         flagText.setBackground(new Color(235, 235, 235));
         chooseLanguage.setBackground(new Color(255, 255, 255));
         quit.setBackground(new Color(240, 240, 240));
@@ -90,15 +87,14 @@ public class Menu extends JPanel
         next.setBackground(new Color(240, 240, 240));
 
         //Border settings
-        topLine.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         quit.setBorder(BorderFactory.createRaisedBevelBorder());
         next.setBorder(BorderFactory.createRaisedBevelBorder());
         chooseLanguage.setBorder(BorderFactory.createRaisedBevelBorder());
         addNewLanguage.setBorder(BorderFactory.createRaisedBevelBorder());
         help.setBorder(BorderFactory.createRaisedBevelBorder());
         logOut.setBorder(BorderFactory.createRaisedBevelBorder());
-        containerW.setBorder(BorderFactory.createRaisedBevelBorder());
-        containerE.setBorder(BorderFactory.createRaisedBevelBorder());
+        containerW.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+        containerE.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
 
         //Font settings
         quit.setFont(font);
@@ -108,8 +104,8 @@ public class Menu extends JPanel
         next.setFont(font);
 
         //Layout settings.
-        container.setLayout(new BorderLayout());
-
+        setLayout(new BorderLayout());
+        
         //Text settings
         flagText.setFont(new Font("serif", Font.BOLD, 19));
         flagText.setText("Engelska");
@@ -126,7 +122,7 @@ public class Menu extends JPanel
         chooseLanguage.addItem(new ImageIcon("images\\spainflag.png"));
 
         //Adding to WEST container.
-        containerW.add(Box.createRigidArea(new Dimension(250, 130)));
+        containerW.add(Box.createRigidArea(new Dimension(250, 115)));
         containerW.add(flagText);
         containerW.add(chooseLanguage);
         containerW.add(next);
@@ -134,18 +130,17 @@ public class Menu extends JPanel
         containerW.add(addNewLanguage);
 
         //Adding to EAST container.
-        containerE.add(Box.createRigidArea(new Dimension(300, 195)));
+        containerE.add(Box.createRigidArea(new Dimension(300, 180)));
         containerE.add(help);
-        containerE.add(Box.createRigidArea(new Dimension(300, 270)));
+        containerE.add(Box.createRigidArea(new Dimension(300, 265)));
         containerE.add(logOut);
         containerE.add(quit);
 
         //Adding to main container.
-        container.add(topLine, BorderLayout.NORTH);
-        container.add(topHeading, BorderLayout.CENTER);
-        container.add(containerW, BorderLayout.WEST);
-        container.add(containerE, BorderLayout.EAST);
-        add(container);//Adding to extended JPanel
+        //container.add(topLine, BorderLayout.PAGE_START);
+        add(topHeading, BorderLayout.CENTER);
+        add(containerW, BorderLayout.LINE_START);
+        add(containerE, BorderLayout.LINE_END);
 
     }
 

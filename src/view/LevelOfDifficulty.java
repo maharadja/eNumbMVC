@@ -6,8 +6,10 @@
 package view;
 
 import control.LevelOfDiffucltyListener;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.Hashtable;
 import javax.swing.Box;
@@ -24,7 +26,7 @@ import javax.swing.JToolTip;
 public class LevelOfDifficulty extends JPanel
 {
 
-    private JPanel container;
+    private JPanel  centerPanel, leftPanel, rightPanel;
     private JLabel chooseDifficultyText;
     private JSlider slider;
     private JButton back, go;
@@ -35,7 +37,10 @@ public class LevelOfDifficulty extends JPanel
     {
 
         //new Panels
-        container = new JPanel();
+        //container = new JPanel(new BorderLayout());
+        centerPanel = new JPanel(new FlowLayout());
+        leftPanel = new JPanel();
+        rightPanel = new JPanel();
 
         //new Labels
         chooseDifficultyText = new JLabel("Välj svårighetsgrad!");
@@ -45,26 +50,48 @@ public class LevelOfDifficulty extends JPanel
         go = new JButton("Kör!");
 
         //new Slider
-        slider = new JSlider(JSlider.HORIZONTAL, 1, 3, 1);
-
+        slider = new JSlider(JSlider.HORIZONTAL, 0, 2, 0);
+        
+        setLayout(new BorderLayout());
+        
+        
         //new HashTable
         Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
-
+        labelTable.put(0, new JLabel("Lätt"));
+        labelTable.put(1, new JLabel("Medel"));
+        labelTable.put(2, new JLabel("Svårt"));
+        
+        //slider.setMajorTickSpacing(0);
+        slider.setPaintTicks(true);
+        slider.setLabelTable(labelTable);
+        slider.setPaintLabels(true);
+        
         main = jf;
 
         //LevelOfDiffucltyListener
-        LevelOfDiffucltyListener listener = new LevelOfDiffucltyListener(container, chooseDifficultyText, slider, back, go, main, toolTipEasy);
+        LevelOfDiffucltyListener listener = new LevelOfDiffucltyListener(chooseDifficultyText, slider, back, go, main, toolTipEasy);
 
-        //set size
-        container.setPreferredSize(new Dimension(700, 500));
-        slider.setPreferredSize(new Dimension(700, 150));
+        //Settings for JSlider
+         
 
-        //background settings
-        setBackground(Color.WHITE);
-        container.setBackground(Color.WHITE);
-        slider.setBackground(Color.WHITE);
+        
+        
+        //Size settings
+        setPreferredSize(new Dimension(1290,890));
+        //container.setPreferredSize(new Dimension(1310, 855));
+        slider.setPreferredSize(new Dimension(800, 150));
+        centerPanel.setPreferredSize(new Dimension(500,900));
+        leftPanel.setPreferredSize(new Dimension(250, 900));
+        rightPanel.setPreferredSize(new Dimension(250, 900));
 
-        //font settings
+        //Background settings
+        setBackground(Color.BLACK);
+        //container.setBackground(new Color(15,161,163));
+        centerPanel.setBackground(new Color(255, 255, 255));
+        leftPanel.setBackground(new Color(163,42,15));
+        rightPanel.setBackground(new Color(240,90,40));
+
+        //Font settings
         chooseDifficultyText.setFont(new Font("century gothic", Font.BOLD, 34));
 
         //add actionListeners and changeListeners
@@ -72,22 +99,20 @@ public class LevelOfDifficulty extends JPanel
         go.addActionListener(listener);
         slider.addChangeListener(listener);
 
-        //Settings for JSlider
-        labelTable.put(1, new JLabel("Lätt"));
-        labelTable.put(2, new JLabel("Medel"));
-        labelTable.put(3, new JLabel("Svårt"));
-        slider.setLabelTable(labelTable);
-        slider.setPaintLabels(true);
-        slider.setPaintTicks(true);
-        slider.setMajorTickSpacing(0);
-
+        
         //Addings
-        container.add(chooseDifficultyText);
-        container.add(Box.createRigidArea(new Dimension(58, 220)));
-        container.add(slider);
-        container.add(go);
-        container.add(back);
-        add(container);
+        centerPanel.add(chooseDifficultyText);
+        centerPanel.add(Box.createRigidArea(new Dimension(250, 290)));
+        centerPanel.add(slider);
+        centerPanel.add(go);
+        centerPanel.add(back);
+        //container.add(centerPanel, BorderLayout.CENTER);
+        //container.add(leftPanel, BorderLayout.LINE_START);
+        //container.add(rightPanel, BorderLayout.LINE_END);
+        add(centerPanel);
+        add(leftPanel, BorderLayout.LINE_START);
+        add(rightPanel, BorderLayout.LINE_END);
+        //add(container);
 
     }
 

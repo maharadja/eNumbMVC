@@ -28,9 +28,12 @@ public class GetHandler
 
     }
 
-    public String[] getWordList(String lang)
+    public String[] getWordList()
     {
-        return new String[]{"hej"};
+        return new String[]
+        {
+            "hej"
+        };
     }
 
 }

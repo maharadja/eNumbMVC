@@ -5,16 +5,13 @@
  */
 package control;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JToolTip;
-import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import view.Enumb;
@@ -32,8 +29,9 @@ public class LevelOfDiffucltyListener implements ActionListener, ChangeListener
     private JButton back, go;
     private Enumb main;
     private JToolTip toolTipEasy; // Används inte... provar lite för att slippa bakgrunden på tooltipen.
+    private int fps;
 
-    public LevelOfDiffucltyListener(JPanel container, JLabel chooseDifficultyText, JSlider slider, JButton back, JButton go, Enumb main, JToolTip toolTipEasy)
+    public LevelOfDiffucltyListener( JLabel chooseDifficultyText, JSlider slider, JButton back, JButton go, Enumb main, JToolTip toolTipEasy)
     {
         this.container = container;
         this.chooseDifficultyText = chooseDifficultyText;
@@ -53,29 +51,13 @@ public class LevelOfDiffucltyListener implements ActionListener, ChangeListener
     public void stateChanged(ChangeEvent e)
     {
         JSlider source = (JSlider) e.getSource();
-        int fps = (int) source.getValue();
-
-        UIManager.put("ToolTip.background", new Color(0x40, 0x51, 0x67, 0x40)); //Changes background color on toolTip.
-        UIManager.put("ToolTip.border", BorderFactory.createEmptyBorder()); // Removes border on tooltip.
-
-        String toolTipEasy = "<html><img src=\"file:images\\easy.png\"></html>";
-        String toolTipMedium = "<html><img src=\"file:images\\medium.png\"></html>";
-        String toolTipHard = "<html><img src=\"file:images\\hard.png\"></html>";
-        if (fps == 1)
-        {
-            slider.setToolTipText(toolTipEasy);
+        if (!source.getValueIsAdjusting ()) {
+            fps = (int) source.getValue();
         }
-        else if (fps == 2)
-        {
-            slider.setToolTipText(toolTipMedium);
-            container.updateUI();
-
-        }
-        else if (fps == 3)
-        {
-            slider.setToolTipText(toolTipHard);
-        }
+ 
     }
+    
+    
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -87,8 +69,11 @@ public class LevelOfDiffucltyListener implements ActionListener, ChangeListener
         }
         else if (choice == go)
         {
-            main.goFromDifficultyToRunGame();
-
+            if(fps == 1|| fps == 0 || fps == 2){
+            main.goFromDifficultyToRunGame(fps);}
+            else{
+            System.out.println("JAHADUDETBLIDDEFEL");
+            }      
         }
     }
 
