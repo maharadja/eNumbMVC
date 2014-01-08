@@ -30,10 +30,7 @@ public class GetHandler
 
     public String[] getWordList(String lang)
     {
-        return new String[]
-        {
-            "hej"
-        };
+        return new String[]{"hej"};
     }
 
 }

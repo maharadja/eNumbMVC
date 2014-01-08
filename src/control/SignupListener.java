@@ -33,7 +33,11 @@ public class SignupListener
 
     public void addNewUser(String firstName, String lastName, String password, String passwordRetype)
     {
-        game.addNewUser(firstName, lastName, password, password);
+        if(game.checkPassword(password, passwordRetype)){ 
+            
+            game.addNewUser(firstName, lastName, password, password);
+        }
+        
     }
 
 }

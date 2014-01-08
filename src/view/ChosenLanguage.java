@@ -64,7 +64,7 @@ public class ChosenLanguage extends JPanel
 
         //Adding to ComboBox
         GetHandler handler = new GetHandler();
-        String[] temp = handler.getWordList();
+        String[] temp = handler.getWordList("engelska");
 
         for (int i = 0; i < temp.length; i++)
         {

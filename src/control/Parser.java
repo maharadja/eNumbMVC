@@ -26,17 +26,17 @@ public class Parser
         game.getUserList();
     }
 
-    public String validateUserInput(String word)
+    public static String validateUserInput(String word)
     {
         String input = word.toLowerCase().trim();
         maxLetters(input);
         eliminateNumbers(input);
-        System.out.println(input);
+        //System.out.println(input);
 
         return input;
     }
 
-    private String maxLetters(String word)
+    public static String maxLetters(String word)
     {
         if (word.length() > 24 || word.length() < 1)
         {
@@ -45,7 +45,7 @@ public class Parser
         return word;
     }
 
-    private String eliminateNumbers(String input)
+    public static String eliminateNumbers(String input)
     {
         Scanner sc = new Scanner(System.in);
         if (sc.hasNextInt())
@@ -53,6 +53,11 @@ public class Parser
             //felmeddelande panel
         }
         return input;
+    }
+    public static String cleanUp(String s){
+        
+          return s.toLowerCase().trim();
+        
     }
 
     public void validateFullName(String name)
