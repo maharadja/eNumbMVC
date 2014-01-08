@@ -50,7 +50,8 @@ public class FileManagerTest
     @Test
     public void testReadWordFile()
     {
-        WordList words = fm.readWordFile("words1");
+        File testFile = new File("words1.txt");
+        WordList words = fm.readWordFile(testFile);
 
         String result = words.getLang();
         String expResult = "engelska";
@@ -121,8 +122,8 @@ public class FileManagerTest
     
         String[] expResult = new String[]{"hund", "vecka 1", "words", "words1"};
         
-        String[] result = fm.getListOfWordSections("filename");
-        System.out.println(result[0]+result[1]+result[2]+result[3]);
+        String[] result = fm.getListOfWordSections();
+      
         Assert.assertArrayEquals(expResult, result);
         
     }
@@ -132,13 +133,35 @@ public class FileManagerTest
         
         String expResult = "engelska";
         
-        String[] langs = fm.getListOfWordSections("language");
+        String[] langs = fm.readLangFile();
         
         String result = langs[0];
         
         Assert.assertEquals(expResult, result);
     }
-
-
     
+    
+    
+    @Test
+    public void testWriteLangListFile(){
+        
+        fm.writeLangList(new String[]{"engelska", "spanska"});
+        
+        File result = new File("data//langs.txt");
+        
+        Assert.assertTrue(result.exists());
+        
+    }
+           
+
+    @Test
+    public void testReadLanguageFile(){
+        
+        String[] expResult = new String[]{"engelska", "spanska"};
+        
+        String[] result = fm.readLangFile();
+        
+        Assert.assertArrayEquals(expResult, result);
+        
+    }
 }

@@ -84,5 +84,17 @@ public class UserList
 
         return listOfNames;
     }
+ 
+
+    public boolean nameAvailable(String username) {
+        
+        for(User u : userlist ){
+            if(u.getUsername().equals(username)){
+                return false;
+            }
+        }
+          
+                return true;
+    }
 
 }

@@ -111,5 +111,12 @@ public class UserListTest
         Assert.assertArrayEquals(expResult, result);
 
     }
+    
+    @Test
+    public void testIfUserNameIsFree(){
+        
+        Assert.assertTrue(userlist.nameAvailable("kopernikus"));
+        
+    }
 
 }

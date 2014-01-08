@@ -7,6 +7,7 @@ package model;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -100,25 +101,108 @@ public class GameTest
             "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat",
             "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat",
         };
-
+        
+        game.getListOfLanguageSections("engelska");
         game.createWordList("vecka 1", "engelska", words);
 
         assertNotNull(game.getWordList("vecka 1"));
 
     }
     
-    @Test
-    public void testGettingListOfWordfiles(){
-        
-        assertNotNull(game.getListOfWordfiles());
-        
-    }
     
     @Test
     public void testGettingListOfLangauges(){
         
-        //assertNotNull(game.getListOfLanguages());
+        assertNotNull(game.getListOfLanguages());  
+    }
+    
+    @Test
+    public void testSettingListOfLanguages(){
+        
+        String[] expResult = new String[]{"engelska", "spanska", "franska"};
+        
+        game.setLanguageList(expResult);
+        
+        String[] result = game.getListOfLanguages();
+        
+    }
+    
+    @Test
+    public void testGettingListOfEnglishWordLists(){
+        
+        String[] expResult = new String[]{"hund", "vecka 1", "words", "words1"};
+        
+        String[] result = game.getListOfLanguageSections("engelska");
+        
+        Assert.assertArrayEquals(expResult, result);
+    }
+    
+    
+    @Test
+    public void testIfInputWordMatchesTranslation(){
+        
+        game.getListOfLanguageSections("engelska");
+        game.setUserAndList("words", "adrian ronsten", 1);
+        
+        assertTrue( game.checkWord(1, "cat") );
+        
+    }
+    
+    @Test
+    public void testGettingWord(){
+        
+        game.getListOfLanguageSections("engelska");
+        game.setUserAndList("words", "adrian ronsten", 1);
+        
+        String[] expResult = new String[]{"katt", "cat", "engelska"};
+        
+        String[] result = game.getWord(1);
+        
+        Assert.assertArrayEquals(expResult, result);
+    }
+    
+    
+    @Test
+    public void testPlayingTheGameGettingAndSavingScore(){
+        
+        game.getListOfLanguageSections("engelska");
+        game.setUserAndList("words", "adrian ronsten", 2);
+        
+        for (int i = 0; i < 10; i++) {
+            game.checkWord(i, "cat");
+        }
+        
+        game.saveScore();     
+        
+        int result = game.getUser("adrian ronsten").getHightScore();
+        
+        int expResult = 100;
+        
+        assertEquals(expResult, result);
         
     }
 
+    @Test
+    public void testGettingRandomAnswers(){
+       
+        
+        game.getListOfLanguageSections("engelska");
+        game.setUserAndList("words", "adrian ronsten", 2);
+        
+        String rightAnswer = game.getWord(1)[1];
+        
+        String a = game.getRandomAnswer(rightAnswer);
+        String b = game.getRandomAnswer(rightAnswer);
+                
+        Assert.assertFalse( rightAnswer.equals(b));
+        Assert.assertFalse( rightAnswer.equals(a));
+        
+    }
+    
+    @Test
+    public void testCheckingIfUserNameIsTaken(){
+        
+        assertTrue(game.usernameAvailable("snusmumriken11"));
+          
+    }        
 }

@@ -7,6 +7,7 @@ package model;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -86,6 +87,12 @@ public class WordListTest
         wl.removeWord(1);
         assertNull(wl.getWord(1));
 
+    }
+    
+    @Test
+    public void testGettingListOfWords(){
+        
+        Assert.assertNotNull(wl.getWords());
     }
 
 }

@@ -28,9 +28,12 @@ public class GetHandler
 
     }
 
-    public String[] getWordList()
+    public String[] getWordList(String lang)
     {
-        return game.getListOfWordfiles();
+        return new String[]
+        {
+            "hej"
+        };
     }
 
 }

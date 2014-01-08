@@ -32,13 +32,13 @@ public class WordList
 
     public String[] getWord(int i)
     {
-
-        //for(Word w : words){
-        //    if(w.getSwed().equals(s) || w.getFor().equals(s)){
-        //        return w.toStringArray();
-        //    }
-        // }
+      
         return words.get(i).toStringArray();
+    }
+    
+    public ArrayList<Word> getWords(){
+        
+        return words;
     }
 
     public int getListSize()

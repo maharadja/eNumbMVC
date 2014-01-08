@@ -26,93 +26,11 @@ public class FileManager
     File[] userfiles = userDirectory.listFiles();
     ArrayList<WordList> wordSections;
     
-    
-
-    public WordList readWordFile(String filename)
-    {
-
-        tempFile = new File("data\\words\\" + filename + ".txt");
-
-        WordList words = new WordList("words");
-
-        String lang;
-
-        try
-        {
-            scanner = new Scanner(tempFile);
-        }
-        catch (Exception e)
-        {
-            System.out.println("file not read");
-        }
-
-        lang = scanner.nextLine();
-
-        for (int i = 0; i < 10; i++)
-        {
-            words.addNewWord(scanner.next(), scanner.next(), lang);
-        }
-        
-        return words;
+    public FileManager(){
+        wordSections = new ArrayList<>();
     }
 
-    public void writeWordFile(WordList wl)
-    {
-
-        tempFile = new File("data\\words\\" + wl.getName() + ".txt");
-        tempFile.getParentFile().getParentFile().mkdirs();
-        tempFile.getParentFile().mkdirs();
-
-        try
-        {
-            PrintWriter writer = new PrintWriter(tempFile);
-            writer.println(wl.getLang());
-            for (int i = 0; i < 10; i++)
-            {
-                String[] s = wl.getWord(i);
-                writer.println(s[0] + " " + s[1]);
-            }
-            writer.close();
-        }
-        catch (IOException e)
-        {
-            System.out.println("write failed");
-        }
-    }
-
-    public UserList readUserFiles()
-    {
-
-        // File tempFile = new File(fileName + ".txt");
-        UserList userlist = new UserList();
-        int index = 0;
-
-        while (index < userfiles.length)
-        {
-
-            try
-            {
-                Scanner scanner = new Scanner(userfiles[index]);
-                userlist.addUser((new String[]
-                {
-                    scanner.nextLine(), scanner.nextLine(), scanner.nextLine()
-                }));
-            }
-            catch (Exception e)
-            {
-                System.out.println("file not found");
-            }
-
-            index++;
-        }
-
-        return userlist;
-    }
-
-    public void createUserList()
-    {
-
-    }
+ 
 
     public void writeUserFile(User user)
     {
@@ -133,11 +51,24 @@ public class FileManager
             writer.println(tempUser.getTotalScore());
             writer.close();
         }
-        catch (Exception e)
-        {
-        }
+        catch (Exception e){}
 
     }
+    
+    public UserList readUserFiles()
+    {
+      
+        UserList userlist = new UserList();
+        int index = 0;
+
+        while (index < userfiles.length)
+        {
+            userlist.addUser(readLines(userfiles[index], 5));
+            index++;
+        }
+        return userlist;
+    }
+    
 
     void removeUserFile(String fileName)
     {
@@ -147,39 +78,71 @@ public class FileManager
 
     }
     
-    void removeWordFile(String fileName)
+    
+    
+    public void writeWordFile(WordList wl)
+    {
+
+        tempFile = new File("data\\words\\" + wl.getName() + ".txt");
+        tempFile.getParentFile().getParentFile().mkdirs();
+        tempFile.getParentFile().mkdirs();
+
+        try
+        {
+            PrintWriter writer = new PrintWriter(tempFile);
+            writer.println(wl.getLang());
+            for (int i = 0; i < 10; i++)
+            {
+                String[] s = wl.getWord(i);
+                writer.println(s[0]);
+                writer.println(s[1]);
+            }
+            writer.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("write failed");
+        }
+    }
+    
+    public WordList readWordFile(File filename)
+    {
+
+        String name = filename.getName();
+        String newName = name.substring(0, name.length()-4);
+        
+        File actualFile = new File("data//words//" + filename.getName());
+        
+        WordList words = new WordList(newName);
+        String[] allLines = readLines(actualFile, 21);        
+        String lang = allLines[0];
+        
+        for (int i = 1; i < 21; i++)
+        {
+            if( i % 2 == 0 ){
+            words.addNewWord(allLines[i-1], allLines[i], lang);
+            }
+        }
+       
+        return words;
+    }
+    
+    public void removeWordFile(String fileName)
     {
 
         File removeFile = new File("data\\words\\" + fileName + ".txt");
         removeFile.delete();
 
     }
-
-    public String[] getListOfWordSections(String get) {
-        
-        int length = (int) wordfiles.length;
-        
-        String[] list = new String[length];
-       
-        for (int i = 0; i < length; i++) {
-            
-            if(get.equals("filename")){
-            String s = wordfiles[i].getName();
-            s = s.substring(0, s.length()-4);
-            list[i] = s;}
-            else if(get.equals("language")){
-                
-            try{  scanner = new Scanner(wordfiles[i]);
-               String s = scanner.nextLine();
-               list[i] = s;
-             }
-             catch(Exception e){}  
-            }
-          
+    
+    
+    
+    private void readAllWordFiles(){
+           
+        for (int i = 0; i < wordfiles.length; i++) {        
+           
+            wordSections.add(readWordFile(wordfiles[i]));  
         }
-        
-        return list;
-        
     }
     
     public String[] getListOfWordSections(){
@@ -190,29 +153,77 @@ public class FileManager
         
         for (int i = 0; i < wordSections.size(); i++) {
             
-            sections[i] = wordSections.get(i).getName();
+            sections[i] = wordSections.get(i).getName();  
         }
         
         return sections;
     }
-    
-    private void readAllWordFiles(){
+
+    public ArrayList<WordList> getAllListsOfLang(String lang) {
         
-        wordSections = new ArrayList<>();
-        
-        int length = (int) wordfiles.length;
-        
-       // String[] list = new String[length];
+        readAllWordFiles();
        
-        for (int i = 0; i < length; i++) {
-            
-            String s = wordfiles[i].getName();        
-            s = s.substring(0, s.length()-4);
-            wordSections.add(readWordFile(s));  
+        ArrayList<WordList> tempList = new ArrayList<>();
+        
+        for(WordList w : wordSections){
+            if(w.getLang().equals(lang)){
+                tempList.add(w);
+            }
         }
+        
+        return tempList;
+        
     }
-            
+    
 
- 
+    public void writeLangList(String[] langs) {
+       
+        try{
+        PrintWriter writer = new PrintWriter("data//langs.txt");
+            for (int i = 0; i < langs.length; i++) {
+                writer.println(langs[i]);
+            }
+            writer.close();
+        }
+        catch(Exception e){}
+  
+    }
 
+    public String[] readLangFile() {
+        
+        String temp = "";
+        try{
+        scanner = new Scanner(new File("data//langs.txt"));
+        while(scanner.hasNext()){
+            temp += scanner.nextLine() + " ";
+            }
+            scanner.close();
+        return temp.split(" ");
+        }
+        catch(Exception e){}
+        return null;
+    }
+   
+    public String[] readLines(File file, int rows){
+        
+        String[] temp = new String[rows];
+        
+        try{
+        scanner = new Scanner(file);   
+            for (int i = 0; i < rows; i++) {
+                temp[i] = scanner.nextLine().trim().toLowerCase();
+            }    
+        }
+        catch(Exception e){
+        }         
+        return temp;
+    }
+    
+    
+    
+    
+    
+    
+    
+  
 }

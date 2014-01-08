@@ -5,7 +5,8 @@
  */
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -14,10 +15,17 @@ import java.util.*;
 public class Game
 {
 
-    UserList ul;
-    FileManager fm;
-    WordList tempWordlist;
+    private UserList ul;
+    private FileManager fm;
+    private WordList tempWordlist;
     private String tempLang;
+    private ArrayList<WordList> tempWordSections;
+    private String[] languages;
+    private final int LEVEL1 = 8, LEVEL2 = 9, LEVEL3 = 10;
+    private User tempUser;
+    private String currentLanguage;
+    private int score, level;
+    private ArrayList<Word> tempWords;
 
     public Game()
     {
@@ -25,6 +33,8 @@ public class Game
         fm = new FileManager();
         ul = new UserList();
         ul = fm.readUserFiles();
+        languages = fm.readLangFile();
+        score = 0;
 
     }
 
@@ -127,12 +137,11 @@ public class Game
 
     }
 
-    void createWordList(String fileName, String lang, String[] words)
+    public void createWordList(String fileName, String lang, String[] words)
     {
 
-        tempWordlist = new WordList(fileName);
-        tempLang = lang;
-
+        //tempWordlist = new WordList(fileName);
+        //tempLang = Parser.cleanUp(Parser.eliminateNumbers(lang));
         for (int i = 0; i < 20; i++)
         {
             if (i % 2 == 0 || i == 0)
@@ -141,31 +150,150 @@ public class Game
             }
         }
         fm.writeWordFile(tempWordlist);
+
     }
 
     public WordList getWordList(String fileName)
     {
+        getwordSections(currentLanguage);
 
-        return fm.readWordFile(fileName);
+        for (WordList w : tempWordSections)
+        {
+
+            if (fileName.equals(w.getName()))
+            {
+                return w;
+            }
+        }
+        return null;
+    }
+
+    public String[] getListOfLanguages()
+    {
+
+        return languages;
+    }
+
+    public void setLanguageList(String[] langs)
+    {
+
+        fm.writeLangList(langs);
 
     }
-    
-    public String[] getListOfWordfiles(){
-      
-        return fm.getListOfWordSections("filename");
-        
+
+    private void getwordSections(String lang)
+    {
+        tempWordSections = fm.getAllListsOfLang(lang);
     }
-    
-    //public String[] getListOfLanguages(){
-        
-    //    int index = 0;
-      
-    //    String[] langs =  fm.getListOfWordSections("language");
-        
-       
-        
-        
-        
-    // }
+
+    public String[] getListOfLanguageSections(String lang)
+    {
+
+        getwordSections(lang);
+        currentLanguage = lang;
+
+        String[] filenames = new String[tempWordSections.size()];
+
+        for (int i = 0; i < tempWordSections.size(); i++)
+        {
+            filenames[i] = tempWordSections.get(i).getName();
+        }
+
+        return filenames;
+    }
+
+    public void setUserAndList(String wordSection, String user, int level)
+    {
+
+        tempWordlist = getWordList(wordSection);
+        tempUser = getUser(user);
+
+        listAllWords();
+
+        switch (level)
+        {
+
+            case 0:
+                this.level = LEVEL1;
+                break;
+            case 1:
+                this.level = LEVEL2;
+                break;
+            case 2:
+                this.level = LEVEL3;
+        }
+
+    }
+
+    public boolean checkWord(int i, String s)
+    {
+        if (tempWordlist.getWord(i)[1].equals(s))
+        {
+            score += level;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public String[] getWord(int index)
+    {
+
+        return tempWordlist.getWord(index);
+    }
+
+    public int getScore()
+    {
+
+        return score;
+    }
+
+    public void saveScore()
+    {
+
+        tempUser.setTotalScore(tempUser.getTotalScore() + score);
+
+        if (score > tempUser.getHightScore())
+        {
+            tempUser.setHighscore(score);
+        }
+        fm.writeUserFile(tempUser);
+
+    }
+
+    private void listAllWords()
+    {
+
+        tempWords = new ArrayList<>();
+
+        for (WordList w : tempWordSections)
+        {
+
+            tempWords.addAll(w.getWords());
+            System.out.println(w.getName());
+        }
+    }
+
+    public String getRandomAnswer(String notThisWord)
+    {
+
+        Collections.shuffle(tempWords);
+        int index = 0;
+
+        while (notThisWord.equals(tempWords.get(index).getFor()))
+        {
+            index++;
+        }
+
+        return tempWords.get(index).toStringArray()[1];
+    }
+
+    public boolean usernameAvailable(String username)
+    {
+
+        return ul.nameAvailable(username);
+    }
 
 }
