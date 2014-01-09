@@ -30,10 +30,8 @@ public class GetHandler
 
     public String[] getWordList()
     {
-        return new String[]
-        {
-            "hej"
-        };
+        return game.getListOfLanguageSections("engelska");
+
     }
 
 }

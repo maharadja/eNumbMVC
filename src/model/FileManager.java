@@ -113,16 +113,17 @@ public class FileManager
         String name = filename.getName();
         String newName = name.substring(0, name.length()-4);
         
-        File actualFile = new File("data//words//" + filename.getName());
+        File actualFile = new File("data\\words\\" + filename.getName());
         
         WordList words = new WordList(newName);
         String[] allLines = readLines(actualFile, 21);        
-        String lang = "engelska"; //allLines[0];
+        String lang = allLines[0];
         
         for (int i = 1; i < 21; i++)
         {
             if( i % 2 == 0 ){
             words.addNewWord(allLines[i-1], allLines[i], lang);
+               // System.out.println(allLines[i-1] + " " + allLines[i]);
             }
         }
        

@@ -50,7 +50,7 @@ public class FileManagerTest
     @Test
     public void testReadWordFile()
     {
-        File testFile = new File("words1.txt");
+        File testFile = new File("hund.txt");
         WordList words = fm.readWordFile(testFile);
 
         String result = words.getLang();
@@ -120,7 +120,7 @@ public class FileManagerTest
     @Test
     public void testGetListofWordFiles(){
     
-        String[] expResult = new String[]{"hund", "vecka 1", "words", "words1"};
+        String[] expResult = new String[]{"hund", "vecka 1", "words"};
         
         String[] result = fm.getListOfWordSections();
       
