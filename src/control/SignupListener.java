@@ -27,6 +27,10 @@ public class SignupListener
         this.password = password;
         this.passwordRetype = passwordRetype;
         game = new Game();
+        Parser parser = new Parser();
+        parser.validateUserInput(firstName);
+        parser.validateUserInput(lastName);
+
         addNewUser(firstName, lastName, password, password);
 
     }

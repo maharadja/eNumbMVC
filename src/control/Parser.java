@@ -6,6 +6,7 @@ package control;
 
 import java.util.Scanner;
 import model.Game;
+import view.ErrorMessage;
 
 /**
  *
@@ -26,7 +27,7 @@ public class Parser
         game.getUserList();
     }
 
-    public static String validateUserInput(String word)
+    public String validateUserInput(String word)
     {
         String input = word.toLowerCase().trim();
         maxLetters(input);
@@ -36,16 +37,19 @@ public class Parser
         return input;
     }
 
-    public static String maxLetters(String word)
+    public String maxLetters(String word)
     {
-        if (word.length() > 24 || word.length() < 1)
+        if (word.length() > 5 || word.length() < 1)
         {
-            //felmeddelande panel
+            ErrorMessage.display("Du får inte har mer än 10 tecken");//felmeddelande panel
+            return word;
         }
+
         return word;
+
     }
 
-    public static String eliminateNumbers(String input)
+    public String eliminateNumbers(String input)
     {
         Scanner sc = new Scanner(System.in);
         if (sc.hasNextInt())
@@ -53,31 +57,6 @@ public class Parser
             //felmeddelande panel
         }
         return input;
-    }
-    public static String cleanUp(String s){
-        
-          return s.toLowerCase().trim();
-        
-    }
-
-    public void validateFullName(String name)
-    {
-        String user = name.toLowerCase().trim();
-        maxLetters(user);
-    }
-
-    public void passwordCheck(String password)
-    {
-        String word = password.toLowerCase().trim();
-        maxLetters(word);
-    }
-
-    public void validateAnswer(String answer)
-    {
-        String word = answer.toLowerCase().trim();
-        eliminateNumbers(word);
-        maxLetters(word);
-        //send to model
     }
 
     public void setGame(int difficultyLevel)
