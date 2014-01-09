@@ -27,7 +27,9 @@ public class FileManager
     ArrayList<WordList> wordSections;
     
     public FileManager(){
+        
         wordSections = new ArrayList<>();
+      
     }
 
  
@@ -115,7 +117,7 @@ public class FileManager
         
         WordList words = new WordList(newName);
         String[] allLines = readLines(actualFile, 21);        
-        String lang = allLines[0];
+        String lang = "engelska"; //allLines[0];
         
         for (int i = 1; i < 21; i++)
         {
@@ -142,7 +144,8 @@ public class FileManager
         for (int i = 0; i < wordfiles.length; i++) {        
            
             wordSections.add(readWordFile(wordfiles[i]));  
-        }
+            
+        }  
     }
     
     public String[] getListOfWordSections(){
@@ -166,9 +169,10 @@ public class FileManager
         ArrayList<WordList> tempList = new ArrayList<>();
         
         for(WordList w : wordSections){
+            System.out.println(w.getLang());
             if(w.getLang().equals(lang)){
-                tempList.add(w);
-            }
+                tempList.add(w);               
+            } 
         }
         
         return tempList;
