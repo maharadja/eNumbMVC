@@ -122,7 +122,7 @@ public class GameTest
 
         String[] expResult = new String[]
         {
-            "engelska", "spanska", "franska"
+            "engelska", "spanska"
         };
 
         game.setLanguageList(expResult);
@@ -137,7 +137,7 @@ public class GameTest
 
         String[] expResult = new String[]
         {
-            "hund", "vecka 1", "words", "words 1"
+            "hund", "vecka 1", "words",
         };
 
         String[] result = game.getListOfLanguageSections("engelska");
