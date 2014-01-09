@@ -2,15 +2,12 @@ package view;
 
 import control.GetHandler;
 import control.LoginListener;
-import control.MainFactory;
-import control.Parser;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import static java.awt.Frame.HAND_CURSOR;
 import java.io.IOException;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import model.Game;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -38,11 +34,9 @@ public class LogIn extends JPanel
     private final JButton logIn, newUser;
     private final Enumb main;
     private final JLayeredPane jPane;
-    
 
     public LogIn(Enumb jf) throws IOException
     {
-        
 
         //new Labels
         JLabel background = new JLabel(new ImageIcon("images\\background2new.png"));
@@ -68,10 +62,10 @@ public class LogIn extends JPanel
         LoginListener listener = new LoginListener(name, whatName, whatPassword, password, logIn, newUser, main, jPane);
 
         //size settings
+        setPreferredSize(new Dimension(512, 680));
         background.setSize(512, 680);
         jPane.setPreferredSize(new Dimension(512, 680));
 
-        
         //location settings.
         password.setBounds(180, 165, 180, 30);
         name.setBounds(180, 130, 180, 30);
@@ -81,9 +75,11 @@ public class LogIn extends JPanel
         whatPassword.setBounds(58, 165, 180, 30);
 
         //background settings.
-        setBackground(Color.PINK);
+        setBackground(new Color(235, 235, 235));
         name.setBackground(new Color(255, 255, 255));
-        
+        logIn.setBackground(new Color(240, 240, 240));
+        newUser.setBackground(new Color(240, 240, 240));
+
         //layout settings
         setLayout(new FlowLayout());
 
@@ -95,7 +91,7 @@ public class LogIn extends JPanel
         name.setCursor(new Cursor(HAND_CURSOR));
         logIn.setCursor(new Cursor(HAND_CURSOR));
         newUser.setCursor(new Cursor(HAND_CURSOR));
-        
+
         //Adding stuff to the LayeredPane
         jPane.add(background, new Integer(1));
         jPane.add(logIn, new Integer(2));
@@ -107,11 +103,12 @@ public class LogIn extends JPanel
 
         add(jPane);//Adding to extended JPanel.
         updateList();
-       
 
     }
-    public void updateList(){
-    //Adding items to the username comboBox. Just for show right now...
+
+    public void updateList()
+    {
+        //Adding items to the username comboBox. Just for show right now...
         name.addItem("Välj användare");
 
         GetHandler handler = new GetHandler();

@@ -110,7 +110,7 @@ public class Parser
 
     boolean checkIfPasswordCorrect(String user, String password) {
 
-        game.setUserAndList(null, user, 0);
+        game.setUser(user);
         return game.checkPassword(user, password);
         
     }

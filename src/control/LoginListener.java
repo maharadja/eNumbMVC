@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPasswordField;
 import view.Enumb;
-import view.SignUp;
 
 /**
  *
@@ -58,7 +57,7 @@ public class LoginListener implements ActionListener
         }
         else if (choice == newUser)
         {
-            SignUp.display();
+            main.goFromLoginToNewUser();
 
         }
     }

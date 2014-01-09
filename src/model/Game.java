@@ -278,6 +278,12 @@ public class Game
         
         return ul.nameAvailable(username);    
     }
+    
+    public void setUser(String user){
+        
+        tempUser = ul.getUser(user);
+        
+    }
    
     
 

@@ -27,21 +27,25 @@ public class Menu extends JPanel
 
     private JComboBox<ImageIcon> chooseLanguage;
     private JButton addNewLanguage, help, quit, next, logOut;
-    private JPanel containerW, containerE, topLine;
-    private JLabel topHeading, flagText;
+    private JPanel  containerW, containerE, topLine, centerPanel,bubblePanel;
+    private JLabel topHeading, flagText, mascotLabel,mascotBubble;
     private Enumb main;
 
     public Menu(Enumb jf)
     {
-
+        
         //new Panels
         containerE = new JPanel();
         containerW = new JPanel();
+        centerPanel = new JPanel();
         topLine = new JPanel();
+        bubblePanel = new JPanel();
 
         //new Labels
         topHeading = new JLabel(new ImageIcon("images\\globe5.png"));
         flagText = new JLabel();
+        mascotLabel = new JLabel(new ImageIcon("images\\mouse.png"));
+        mascotBubble = new JLabel(new ImageIcon("images\\prat.png"));
 
         //new Buttons
         addNewLanguage = new JButton("Lägg till nytt språk");
@@ -60,13 +64,17 @@ public class Menu extends JPanel
 
         //MenuListern
         MenuListener listener = new MenuListener(chooseLanguage, addNewLanguage, help, quit, next, logOut, containerW, containerE, topLine, topHeading, flagText, main);
-
+        
         //container.setVisible(false);
         //Size settings.
-        setPreferredSize(new Dimension(1290, 890));
+        setPreferredSize(new Dimension(1290,890));
         containerE.setPreferredSize(new Dimension(250, 900));
         containerW.setPreferredSize(new Dimension(250, 900));
-        topLine.setPreferredSize(new Dimension(1000, 25));
+        centerPanel.setPreferredSize(new Dimension(790,890));
+        topHeading.setPreferredSize(new Dimension(790,700));
+        bubblePanel.setPreferredSize(new Dimension(790,300));
+        mascotLabel.setPreferredSize(new Dimension(200,300));
+        mascotBubble.setPreferredSize(new Dimension(500,280));
         flagText.setPreferredSize(new Dimension(100, 60));
         chooseLanguage.setPreferredSize(new Dimension(90, 60));
         addNewLanguage.setPreferredSize(new Dimension(200, 40));
@@ -74,7 +82,7 @@ public class Menu extends JPanel
         quit.setPreferredSize(new Dimension(200, 40));
         next.setPreferredSize(new Dimension(200, 40));
         logOut.setPreferredSize(new Dimension(200, 40));
-
+        
         //Background settings.
         containerE.setBackground(new Color(17, 54, 56));
         containerW.setBackground(new Color(184, 101, 0));
@@ -95,6 +103,8 @@ public class Menu extends JPanel
         logOut.setBorder(BorderFactory.createRaisedBevelBorder());
         containerW.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
         containerE.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
+        
+
 
         //Font settings
         quit.setFont(font);
@@ -105,7 +115,7 @@ public class Menu extends JPanel
 
         //Layout settings.
         setLayout(new BorderLayout());
-
+        
         //Text settings
         flagText.setFont(new Font("serif", Font.BOLD, 19));
         flagText.setText("Engelska");
@@ -114,14 +124,23 @@ public class Menu extends JPanel
         quit.addActionListener(listener);
         next.addActionListener(listener);
         chooseLanguage.addActionListener(listener);
-        addNewLanguage.addActionListener(listener);
         help.addActionListener(listener);
         logOut.addActionListener(listener);
 
         //Adding to ComboBox
         chooseLanguage.addItem(new ImageIcon("images\\ukflag.png"));
         chooseLanguage.addItem(new ImageIcon("images\\spainflag.png"));
-
+        
+        bubblePanel.add(Box.createRigidArea(new Dimension(200, 300)));
+        bubblePanel.add(mascotBubble);
+        
+        
+        //Adding to centerPanel
+        centerPanel.add(Box.createRigidArea(new Dimension(790, 70)));
+        centerPanel.add(topHeading);
+        centerPanel.add(Box.createRigidArea(new Dimension(90,-200)));
+        centerPanel.add(bubblePanel);
+        
         //Adding to WEST container.
         containerW.add(Box.createRigidArea(new Dimension(250, 115)));
         containerW.add(flagText);
@@ -136,10 +155,11 @@ public class Menu extends JPanel
         containerE.add(Box.createRigidArea(new Dimension(300, 265)));
         containerE.add(logOut);
         containerE.add(quit);
+        containerE.add(mascotLabel);
 
         //Adding to main container.
         //container.add(topLine, BorderLayout.PAGE_START);
-        add(topHeading, BorderLayout.CENTER);
+        add(centerPanel, BorderLayout.CENTER);
         add(containerW, BorderLayout.LINE_START);
         add(containerE, BorderLayout.LINE_END);
 

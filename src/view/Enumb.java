@@ -33,6 +33,7 @@ public final class Enumb extends JFrame
     LevelOfDifficulty levelOfDifficulty;
     GameRun gameRun;
     Result result;
+    NewUser newUser;
 
     public Enumb() throws IOException
     {
@@ -49,6 +50,7 @@ public final class Enumb extends JFrame
         levelOfDifficulty = new LevelOfDifficulty(this);
         gameRun = new GameRun(this, 2);
         result = new Result(this);
+        newUser = new NewUser();
 
         //addNewLanguage = new AddNewLanguage(this);
         JFrame();
@@ -131,6 +133,15 @@ public final class Enumb extends JFrame
         pack();
         setLocationRelativeTo(null);
 
+    }
+
+    public void goFromLoginToNewUser()
+    {
+        cl.show(cont, "7");
+        setPreferredSize(new Dimension(512, 690));
+        newUser.updateUI();
+        pack();
+        setLocationRelativeTo(null);
     }
 
     public void logOutUser()

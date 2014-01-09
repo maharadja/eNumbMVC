@@ -120,7 +120,7 @@ public class FileManagerTest
     @Test
     public void testGetListofWordFiles(){
     
-        String[] expResult = new String[]{"hund", "vecka1", "words", "words1"};
+        String[] expResult = new String[]{"hund", "vecka 1", "words", "words1"};
         
         String[] result = fm.getListOfWordSections();
       

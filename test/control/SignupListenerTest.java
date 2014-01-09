@@ -18,7 +18,7 @@ import org.junit.Test;
 public class SignupListenerTest
 {
 
-    private SignupListener sl;
+    private NewUserListener sl;
 
     public SignupListenerTest()
     {
