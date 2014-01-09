@@ -67,6 +67,10 @@ public final class Enumb extends JFrame
 
     }
 
+//    public static void main(String[] args) throws IOException
+//    {
+//        Enumb enumb = new Enumb();
+//    }
     public void JFrame()
     {
         //settings for the extended JFrame
@@ -81,11 +85,6 @@ public final class Enumb extends JFrame
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException
-    {
-        Enumb enumb = new Enumb();
-    }
-
     public void goFromLogin()
     {
         cl.show(cont, "2");

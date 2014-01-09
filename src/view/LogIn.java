@@ -2,6 +2,7 @@ package view;
 
 import control.GetHandler;
 import control.LoginListener;
+import control.MainFactory;
 import control.Parser;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -37,13 +38,11 @@ public class LogIn extends JPanel
     private final JButton logIn, newUser;
     private final Enumb main;
     private final JLayeredPane jPane;
-    private Parser par;
-    private Game game;
+    
 
     public LogIn(Enumb jf) throws IOException
     {
-        par = new Parser();
-        game = new Game();
+        
 
         //new Labels
         JLabel background = new JLabel(new ImageIcon("images\\background2new.png"));

@@ -6,7 +6,6 @@ package control;
 
 import java.util.Scanner;
 import model.Game;
-import view.ErrorMessage;
 
 /**
  *
@@ -15,60 +14,109 @@ import view.ErrorMessage;
 public class Parser
 {
 
-    private Game game;
+    private  Game game;
 
-    public Parser()
+    public Parser(Game game)
     {
-        game = new Game();
+        this.game = game;
     }
 
     public void getUserList()
     {
         game.getUserList();
+        
     }
 
-    public String validateUserInput(String word)
+    //Behövs den här? väldigt lik validate answer..
+    // Och man kan använda andra metoder för att täcka funktionaliteten
+    public static String validateUserInput(String word)
     {
-        String input = word.toLowerCase().trim();
+        String input = cleanUp(word);
         maxLetters(input);
-        eliminateNumbers(input);
-        //System.out.println(input);
-
+ 
         return input;
     }
 
-    public String maxLetters(String word)
+    public static boolean maxLetters(String word)
     {
-        if (word.length() > 5 || word.length() < 1)
+        if (word.length() > 24 || word.length() < 1)
         {
-            ErrorMessage.display("Du får inte har mer än 10 tecken");//felmeddelande panel
-            return word;
+            return false;
         }
-
-        return word;
-
+        return true;
     }
 
-    public String eliminateNumbers(String input)
+    public static boolean lookForNumbers(String input)
     {
-        Scanner sc = new Scanner(System.in);
-        if (sc.hasNextInt())
-        {
-            //felmeddelande panel
+        String numbers = "1234567890";      
+        
+        for (int i = 0; i < 10; i++) {
+            if(input.contains(numbers.substring(i,i+1))){
+                return false;
+            }  
         }
-        return input;
+        return true;
+    }
+    
+    
+    public static String cleanUp(String s){
+        
+          return s.toLowerCase().trim();
+        
+    }
+    
+    public static boolean passwordCheck(String password, String retype)
+    {
+        if(password.equals(retype)){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
-    public void setGame(int difficultyLevel)
+    public boolean validateUserName(String name)
     {
-        int level = difficultyLevel;
-        switch (level)
-        {
-            case 1: //call method to set difficulty level to 1
-                break;
-            case 2: //call method to set difficulty level to 2
-                break;
-            case 3: //call method to set difficulty level to 3
+        
+        String user = cleanUp(name);
+        
+        if((maxLetters(user) && lookForNumbers(name) && game.usernameAvailable(user))){
+           
+            return true;
         }
+        else{
+            return false;
+        }
+        
+    }
+
+
+    public boolean validateAnswer(String answer, int index)
+    {
+        
+        if(maxLetters(answer) && lookForNumbers(answer)){
+            String word = cleanUp(answer);
+            return game.checkWord(index, word);
+        }
+        
+        return false;
+    }
+
+    
+    public void setGame(String wordSection, String user, int difficultyLevel)
+    {
+        game.setUserAndList(wordSection, user, difficultyLevel);
+    }
+
+    boolean checkIfPasswordCorrect(String user, String password) {
+
+        game.setUserAndList(null, user, 0);
+        return game.checkPassword(user, password);
+        
+    }
+    
+    public Game getGame(){
+        
+        return game;
     }
 }

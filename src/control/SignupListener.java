@@ -27,22 +27,17 @@ public class SignupListener
         this.password = password;
         this.passwordRetype = passwordRetype;
         game = new Game();
-        Parser parser = new Parser();
-        parser.validateUserInput(firstName);
-        parser.validateUserInput(lastName);
-
         addNewUser(firstName, lastName, password, password);
-
+        System.out.println(lastName);
     }
 
     public void addNewUser(String firstName, String lastName, String password, String passwordRetype)
     {
-        if (game.checkPassword(password, passwordRetype))
-        {
-
+        if(game.checkPassword(password, passwordRetype)){ 
+            
             game.addNewUser(firstName, lastName, password, password);
         }
-
+        
     }
 
 }
