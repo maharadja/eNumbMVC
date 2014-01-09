@@ -47,14 +47,14 @@ public final class Enumb extends JFrame
         menu = new Menu(this);
         chosenLanguage = new ChosenLanguage(this);
         levelOfDifficulty = new LevelOfDifficulty(this);
-        gameRun = new GameRun(this,2);
-        result = new Result();
-        
+        gameRun = new GameRun(this, 2);
+        result = new Result(this);
+
         //addNewLanguage = new AddNewLanguage(this);
         JFrame();
         //layout settings.
         cont.setLayout(cl);
-        
+
         //addings.
         cont.add(login, "1");
         cont.add(menu, "2");
@@ -64,7 +64,6 @@ public final class Enumb extends JFrame
         add(cont);//adding to extended JFrame
 
         cl.show(cont, "1");
-        
 
     }
 
@@ -124,13 +123,14 @@ public final class Enumb extends JFrame
         pack();
         setLocationRelativeTo(null);
     }
-    
-    public void goFromGameRunToResult(){
-    cl.show(cont, "6");
-    setPreferredSize(new Dimension(1330, 900));
-    result.updateUI();
-    pack();
-    setLocationRelativeTo(null);
+
+    public void goFromGameRunToResult()
+    {
+        cl.show(cont, "6");
+        setPreferredSize(new Dimension(1330, 900));
+        result.updateUI();
+        pack();
+        setLocationRelativeTo(null);
 
     }
 

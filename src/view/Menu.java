@@ -27,7 +27,7 @@ public class Menu extends JPanel
 
     private JComboBox<ImageIcon> chooseLanguage;
     private JButton addNewLanguage, help, quit, next, logOut;
-    private JPanel  containerW, containerE, topLine;
+    private JPanel containerW, containerE, topLine;
     private JLabel topHeading, flagText;
     private Enumb main;
 
@@ -60,10 +60,10 @@ public class Menu extends JPanel
 
         //MenuListern
         MenuListener listener = new MenuListener(chooseLanguage, addNewLanguage, help, quit, next, logOut, containerW, containerE, topLine, topHeading, flagText, main);
-        
+
         //container.setVisible(false);
         //Size settings.
-        setPreferredSize(new Dimension(1290,890));
+        setPreferredSize(new Dimension(1290, 890));
         containerE.setPreferredSize(new Dimension(250, 900));
         containerW.setPreferredSize(new Dimension(250, 900));
         topLine.setPreferredSize(new Dimension(1000, 25));
@@ -74,7 +74,7 @@ public class Menu extends JPanel
         quit.setPreferredSize(new Dimension(200, 40));
         next.setPreferredSize(new Dimension(200, 40));
         logOut.setPreferredSize(new Dimension(200, 40));
-        
+
         //Background settings.
         containerE.setBackground(new Color(17, 54, 56));
         containerW.setBackground(new Color(184, 101, 0));
@@ -105,7 +105,7 @@ public class Menu extends JPanel
 
         //Layout settings.
         setLayout(new BorderLayout());
-        
+
         //Text settings
         flagText.setFont(new Font("serif", Font.BOLD, 19));
         flagText.setText("Engelska");
@@ -114,6 +114,7 @@ public class Menu extends JPanel
         quit.addActionListener(listener);
         next.addActionListener(listener);
         chooseLanguage.addActionListener(listener);
+        addNewLanguage.addActionListener(listener);
         help.addActionListener(listener);
         logOut.addActionListener(listener);
 

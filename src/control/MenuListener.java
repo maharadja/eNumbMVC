@@ -67,6 +67,7 @@ public class MenuListener implements ActionListener
         if (choice == addNewLanguage)
         {
             AddNewLanguage.display();
+
         }
         else if (choice == quit)
         {
