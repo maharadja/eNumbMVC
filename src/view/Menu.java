@@ -42,7 +42,7 @@ public class Menu extends JPanel
         bubblePanel = new JPanel();
 
         //new Labels
-        topHeading = new JLabel(new ImageIcon("images\\globe5.png"));
+        topHeading = new JLabel(new ImageIcon("images\\globe6.png"));
         flagText = new JLabel();
         mascotLabel = new JLabel(new ImageIcon("images\\mouse.png"));
         mascotBubble = new JLabel(new ImageIcon("images\\prat.png"));
@@ -65,9 +65,7 @@ public class Menu extends JPanel
         //MenuListern
         MenuListener listener = new MenuListener(chooseLanguage, addNewLanguage, help, quit, next, logOut, containerW, containerE, topLine, topHeading, flagText, main);
         
-        //container.setVisible(false);
         //Size settings.
-        setPreferredSize(new Dimension(1290,890));
         containerE.setPreferredSize(new Dimension(250, 900));
         containerW.setPreferredSize(new Dimension(250, 900));
         centerPanel.setPreferredSize(new Dimension(790,890));
@@ -103,9 +101,7 @@ public class Menu extends JPanel
         logOut.setBorder(BorderFactory.createRaisedBevelBorder());
         containerW.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
         containerE.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
-        
-
-
+ 
         //Font settings
         quit.setFont(font);
         help.setFont(font);
@@ -131,7 +127,7 @@ public class Menu extends JPanel
         chooseLanguage.addItem(new ImageIcon("images\\ukflag.png"));
         chooseLanguage.addItem(new ImageIcon("images\\spainflag.png"));
         
-        bubblePanel.add(Box.createRigidArea(new Dimension(200, 300)));
+        bubblePanel.add(Box.createRigidArea(new Dimension(280, 330)));
         bubblePanel.add(mascotBubble);
         
         
