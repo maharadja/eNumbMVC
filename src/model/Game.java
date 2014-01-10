@@ -130,12 +130,6 @@ public class Game
             });
             ul.addUser(newUser);
             fm.writeUserFile(newUser);
-            // FIXME raise event
-            // event or item listener.
-            // On the listener OR on the view, add name.addListener()
-            // Main idea:
-            // RELOAD the page ! 
-            
             return true;
         }
         else
@@ -177,13 +171,29 @@ public class Game
     
     public String[] getListOfLanguages(){
         
+        languages = fm.readLangFile();
         return languages;    
      }
 
     public void setLanguageList(String[] langs) {
         
+        languages = langs;
         fm.writeLangList(langs);
         
+    }
+    
+    public void addNewLanguage(String newLang){
+        
+        int index = languages.length ;
+        String[] temp = new String[ index + 1];
+        for (int i = 0; i < index; i++) {
+            temp[i] = languages[i];
+            System.out.println(temp[i]);
+        }
+        temp[index] = newLang;
+        System.out.println(temp[index]);
+        
+        fm.writeLangList(temp);
     }
 
     private void getwordSections(String lang) {

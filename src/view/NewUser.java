@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import org.netbeans.validation.api.builtin.stringvalidation.StringValidators;
+import org.netbeans.validation.api.ui.ValidationGroup;
+import org.netbeans.validation.api.ui.swing.ValidationPanel;
 
 /**
  *
@@ -33,12 +36,15 @@ public class NewUser extends JPanel
     private JLabel registerNew, firstNameLabel, lastNameLabel, passwordLabel, passwordLabel_2;
     private JPanel mainPanel;
     private Enumb main;
+    private ValidationPanel panel;
+    private ValidationGroup group;
 
     public NewUser(Enumb jf)
     {
 
         //new JPanels
         mainPanel = new JPanel();
+        panel = new ValidationPanel();
 
         //new JLabels
         registerNew = new JLabel("Ny användare");
@@ -61,8 +67,7 @@ public class NewUser extends JPanel
 
         main = jf;
 
-        NewUserListener listener = new NewUserListener(firstName, lastName, password, password_2, save, cancel,
-                registerNew, firstNameLabel, lastNameLabel, passwordLabel, passwordLabel_2, mainPanel, main);
+        NewUserListener listener = new NewUserListener(firstName, lastName, password, password_2, save, cancel, main);
 
         //Listeners
         save.addActionListener(listener);
@@ -120,6 +125,14 @@ public class NewUser extends JPanel
         mainPanel.add(save);
         mainPanel.add(Box.createRigidArea(new Dimension(50, 30)));
         mainPanel.add(cancel);
+
+        group = panel.getValidationGroup();
+        group.add(firstName, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(firstName, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(lastName, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(password, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(password_2, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+
         add(mainPanel);
 
     }
