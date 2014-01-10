@@ -59,6 +59,8 @@ public class NewUserListener implements ActionListener
             game.addNewUser(first, last, pass, pass2);
             JOptionPane.showMessageDialog(null, "Registerd");
 
+            //Behöver kalla på updateList metoden i LogIn,
+            // Behöver göra en password check med, sen är nog registerd delen klar
             main.logOutUser();
 
         }
