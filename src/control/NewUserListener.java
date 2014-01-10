@@ -31,7 +31,6 @@ public class NewUserListener implements ActionListener
     private UserList userlist;
     private Game game;
     private JComboBox<String> name;
-    private LoginListener login;
 
     public NewUserListener(JTextField firstName, JTextField lastName, JTextField password, JTextField password_2, JButton save, JButton cancel, Enumb main)
     {
@@ -49,8 +48,7 @@ public class NewUserListener implements ActionListener
 
     public NewUserListener(JComboBox<String> name)
     {
-        this.name = name;
-        login = new LoginListener(name);
+
     }
 
     public void addNewUser(String first, String last, String pass, String pass2)
@@ -58,30 +56,38 @@ public class NewUserListener implements ActionListener
         if (!Parser.verifyNoEmptyFields(first, last, pass, pass2))
         {
             JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda");
-            main.goFromLoginToNewUser();
         }
         else if (!Parser.validateUserInput(first) == true && Parser.validateUserInput(last))
         {
             JOptionPane.showMessageDialog(null, "Fler än 24 tecken är ej tillåtet");
-            main.goFromLoginToNewUser();
         }
         else if (!Parser.passwordCheck(pass, pass2))
         {
             JOptionPane.showMessageDialog(null, "Lösenorden måste vara identiska");
-            main.goFromLoginToNewUser();
         }
-        else if (userlist != null && userlist.getSize() == 0)
+        else if (!parser.userExists(first, last))
         {
             JOptionPane.showMessageDialog(null, "Användaren finns redan");
-            main.goFromLoginToNewUser();
         }
         else
         {
-            game.addNewUser(first, last, pass, pass2);
-            JOptionPane.showMessageDialog(null, "Grattis, du är nu registrerad användare i eNumb");
+            first = parser.cleanUp(first);
+            last = parser.cleanUp(last);
+            pass = parser.cleanUp(pass);
 
+            game.addNewUser(first, last, pass, pass);
+            JOptionPane.showMessageDialog(null, "Grattis, du är nu registrerad användare i eNumb");
             main.logOutUser();
         }
+
+    }
+
+    public void emptyFields()
+    {
+        firstName.setText("");
+        lastName.setText("");
+        password.setText("");
+        password_2.setText("");
     }
 
     //Behöver kalla på updateList metoden i LogIn,
@@ -99,17 +105,15 @@ public class NewUserListener implements ActionListener
             String pass2 = this.password_2.getText();
             addNewUser(first, last, pass, pass2);
             //updates the userlist
-            login.updateList();
-            firstName.setText("");
-            lastName.setText("");
-            password.setText("");
-            password_2.setText("");
+            emptyFields();
+            main.logOutUser();
 
         }
         else if (choice == cancel)
         {
             main.logOutUser();
+            emptyFields();
         }
-    }
 
+    }
 }

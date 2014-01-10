@@ -147,6 +147,7 @@ public final class Enumb extends JFrame
 
     public void logOutUser()
     {
+        login.updateList();
         cl.show(cont, "1");
         JFrame();
     }

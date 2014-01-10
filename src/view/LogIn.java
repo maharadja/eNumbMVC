@@ -1,5 +1,6 @@
 package view;
 
+import control.GetHandler;
 import control.LoginListener;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -101,8 +102,22 @@ public class LogIn extends JPanel
         jPane.add(whatPassword, new Integer(8));
 
         add(jPane);//Adding to extended JPanel.
-        listener.updateList();
+        updateList();
 
     }
 
+    public void updateList()
+    {
+        //Adding items to the username comboBox. Just for show right now...
+        name.removeAllItems();
+        name.addItem("Välj användare");
+
+        GetHandler handler = new GetHandler();
+        String[] temp = handler.getUserList();
+
+        for (int i = 0; i < temp.length; i++)
+        {
+            name.addItem(temp[i]);
+        }
+    }
 }
