@@ -1,6 +1,5 @@
 package view;
 
-import control.GetHandler;
 import control.LoginListener;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -15,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.event.ListDataEvent;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -35,7 +33,6 @@ public class LogIn extends JPanel
     private final JButton logIn, newUser;
     private final Enumb main;
     private final JLayeredPane jPane;
-
 
     public LogIn(Enumb jf) throws IOException
     {
@@ -104,22 +101,8 @@ public class LogIn extends JPanel
         jPane.add(whatPassword, new Integer(8));
 
         add(jPane);//Adding to extended JPanel.
-        updateList();
+        listener.updateList();
 
-    }
-
-    public void updateList()
-    {
-        //Adding items to the username comboBox. Just for show right now...
-        name.addItem("Välj användare");
-
-        GetHandler handler = new GetHandler();
-        String[] temp = handler.getUserList();
-
-        for (int i = 0; i < temp.length; i++)
-        {
-            name.addItem(temp[i]);
-        }
     }
 
 }

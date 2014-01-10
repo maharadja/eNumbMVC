@@ -8,11 +8,11 @@ package control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import model.Game;
 import model.UserList;
-
 import view.Enumb;
 
 /**
@@ -30,6 +30,8 @@ public class NewUserListener implements ActionListener
     private Parser parser;
     private UserList userlist;
     private Game game;
+    private JComboBox<String> name;
+    private LoginListener login;
 
     public NewUserListener(JTextField firstName, JTextField lastName, JTextField password, JTextField password_2, JButton save, JButton cancel, Enumb main)
     {
@@ -42,6 +44,13 @@ public class NewUserListener implements ActionListener
         this.main = main;
         parser = MainFactory.getParser();
         game = parser.getGame();
+
+    }
+
+    public NewUserListener(JComboBox<String> name)
+    {
+        this.name = name;
+        login = new LoginListener(name);
     }
 
     public void addNewUser(String first, String last, String pass, String pass2)
@@ -89,6 +98,8 @@ public class NewUserListener implements ActionListener
             String pass = this.password.getText();
             String pass2 = this.password_2.getText();
             addNewUser(first, last, pass, pass2);
+            //updates the userlist
+            login.updateList();
             firstName.setText("");
             lastName.setText("");
             password.setText("");

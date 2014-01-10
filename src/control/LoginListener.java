@@ -42,16 +42,31 @@ public class LoginListener implements ActionListener
         this.jPane = jPane;
     }
 
-    public LoginListener()
+    public LoginListener(JComboBox<String> name)
     {
+        this.name = name;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void updateList()
+    {
+        //Adding items to the username comboBox. Just for show right now...
+        name.addItem("Välj användare");
+
+        GetHandler handler = new GetHandler();
+        String[] temp = handler.getUserList();
+
+        for (int i = 0; i < temp.length; i++)
+        {
+            name.addItem(temp[i]);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
         Object choice = (e.getSource());
-        
+
         if (choice == logIn)
         {
             main.goFromLogin();
