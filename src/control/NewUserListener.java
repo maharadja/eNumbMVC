@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import model.Game;
+import model.UserList;
 import view.Enumb;
 
 /**
@@ -29,7 +30,8 @@ public class NewUserListener implements ActionListener
     private JLabel registerNew, firstNameLabel, lastNameLabel, passwordLabel, passwordLabel_2;
     private JPanel mainPanel;
     private Enumb main;
-
+    private Parser parser;
+    private UserList userlist;
     private Game game = new Game();
 
     public NewUserListener(JTextField firstName, JTextField lastName, JTextField password, JTextField password_2, JButton save, JButton cancel,
@@ -52,27 +54,37 @@ public class NewUserListener implements ActionListener
 
     public void addNewUser(String first, String last, String pass, String pass2)
     {
-
-        if (Parser.validateUserInput(first) == true && Parser.validateUserInput(pass) == true)
-        {
-
-            game.addNewUser(first, last, pass, pass2);
-            JOptionPane.showMessageDialog(null, "Registerd");
-
-            //Behöver kalla på updateList metoden i LogIn,
-            // Behöver göra en password check med, sen är nog registerd delen klar
-            main.logOutUser();
-
+        if(!Parser.verifyNoEmptyFields(first, last, pass, pass2)){
+            JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda");
+            main.goFromLoginToNewUser();
         }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "WTF ARE YOU STUPID OR WHAT");
+        else if(!Parser.validateUserInput(first) == true && Parser.validateUserInput(last)){
+            JOptionPane.showMessageDialog(null,"Fler än 24 tecken är ej tillåtet");
+            main.goFromLoginToNewUser();
+        }
+        else if (!Parser.passwordCheck(pass, pass2)){
+            JOptionPane.showMessageDialog(null, "Lösenorden måste vara identiska");
+            main.goFromLoginToNewUser();
+        }
+        else if(userlist != null && userlist.getSize() == 0)   {
+            JOptionPane.showMessageDialog(null, "Användaren finns redan");
+            main.goFromLoginToNewUser();
+        }
+        else    {        
+            game.addNewUser(first, last, pass, pass2);
+            JOptionPane.showMessageDialog(null, "Grattis, du är nu registrerad användare i eNumb");
+            
+            main.logOutUser();
         }
     }
+            
+            //Behöver kalla på updateList metoden i LogIn,
+            // Behöver göra en password check med, sen är nog registerd delen klar
+            //main.logOutUser();
 
     @Override
     public void actionPerformed(ActionEvent e)
-    {
+    {   
         Object choice = (e.getSource());
         if (choice == save)
         {

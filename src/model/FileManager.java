@@ -43,17 +43,23 @@ public class FileManager
         tempFile.getParentFile().getParentFile().mkdirs();
         tempFile.getParentFile().mkdirs();
 
+         PrintWriter writer = null;
         try
         {
-            PrintWriter writer = new PrintWriter(tempFile);
+            writer = new PrintWriter(tempFile);
             writer.println(tempUser.getfirstname());
             writer.println(tempUser.getlastname());
             writer.println(tempUser.getPassword());
             writer.println(tempUser.getHightScore());
             writer.println(tempUser.getTotalScore());
-            writer.close();
+            
         }
         catch (Exception e){}
+        finally {
+            if (writer != null) {
+            writer.close();
+            }
+        }
 
     }
     

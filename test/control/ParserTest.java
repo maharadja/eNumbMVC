@@ -48,12 +48,12 @@ public class ParserTest
     {
     }
 
-    @Test
-    public void testvalidateUserInput()
-    {
-        String expResult = "abcd";
-        Assert.assertEquals(expResult, parser.validateUserInput("ABCD"));
-    }
+//    @Test
+//    public void testvalidateUserInput()
+//    {
+//        String expResult = "abcd";
+//        Assert.assertEquals(expResult, parser.validateUserInput("ABCD"));
+//    }
 
     @Test
     public void testMaxMinLettersControl()
@@ -73,30 +73,32 @@ public class ParserTest
 
     }
 
-    @Test
-    public void testValidatingUsername()
-    {
-
-        Assert.assertTrue(parser.validateUserName("SkogsHamster imU"));
-        Assert.assertFalse(parser.validateUserName("adrian ronsten"));
-        Assert.assertFalse(parser.validateUserName("12312331232131232 1231231231212321"));
-    }
 
     @Test
     public void testPasswordsAreTheSame()
     {
 
-        Assert.assertTrue(Parser.passwordCheck("hej", "då"));
-        Assert.assertFalse(Parser.passwordCheck("hej", "hej"));
+        Assert.assertFalse(Parser.passwordCheck("hej", "då"));
+        Assert.assertTrue(Parser.passwordCheck("hej", "hej"));
 
     }
 
     @Test
     public void testPasswordMatchingUsername()
     {
+        
 
-        Assert.assertTrue(parser.checkIfPasswordCorrect("adrian ronsten", "lol"));
-        Assert.assertFalse(parser.checkIfPasswordCorrect("kalle stropp", "snor"));
+        Assert.assertTrue(parser.passwordIsCorrect("adrian ronsten", "lol"));
+        Assert.assertFalse(parser.passwordIsCorrect("kalle stropp", "snor"));
+    }
+    
+    @Test
+    public void testFirstLetterToUpperCase(){
+        
+        String expResult = "Karl";
+        String result = parser.firstLetterCapital("karl");
+        
+        Assert.assertEquals(expResult, result);
     }
 
 }

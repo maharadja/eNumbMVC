@@ -72,30 +72,38 @@ public class Parser
     {
         if (password.equals(retype))
         {
-            return false;
+            return true;
         }
         else
         {
-            return true;
+            return false;
         }
     }
-
-    public boolean validateUserName(String name)
+    public static boolean verifyNoEmptyFields(String first, String last, String pass, String passRetype)
     {
-
-        String user = cleanUp(name);
-
-        if ((maxLetters(user) && lookForNumbers(name) && game.usernameAvailable(user)))
-        {
-
-            return true;
-        }
-        else
-        {
+        if(first.isEmpty() || last.isEmpty() || pass.isEmpty() || passRetype.isEmpty()){
             return false;
         }
-
+        return true;
+        
     }
+
+//    public boolean validateUserName(String name)
+//    {
+//
+//        String user = cleanUp(name);
+//
+//        if((maxLetters(user) && lookForNumbers(name) && game.usernameAvailable(user)))
+//        {
+//
+//            return true;
+//        }
+//        else
+//        {
+//            return false;
+//        }
+//
+//    }
 
     public boolean validateAnswer(String answer, int index)
     {
@@ -114,17 +122,34 @@ public class Parser
         game.setUserAndList(wordSection, user, difficultyLevel);
     }
 
-    boolean checkIfPasswordCorrect(String user, String password)
+    public boolean passwordIsCorrect(String user, String password)
     {
-
-        game.setUser(user);
+        //game.setUser(user);
         return game.checkPassword(user, password);
 
+    }
+    public boolean userExists(String first, String last)
+    {
+        String f = cleanUp(first);
+        String l = cleanUp(last);
+        
+        if(game.usernameAvailable(f + " " + l)){
+            return true;
+        }
+        return false;
     }
 
     public Game getGame()
     {
 
         return game;
+    }
+
+    public String firstLetterCapital(String name) {
+        
+        String properName = name.substring(0,1).toUpperCase() + name.substring(1);
+        
+        return properName;
+        
     }
 }

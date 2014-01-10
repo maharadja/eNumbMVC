@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.event.ListDataEvent;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,6 +35,7 @@ public class LogIn extends JPanel
     private final JButton logIn, newUser;
     private final Enumb main;
     private final JLayeredPane jPane;
+
 
     public LogIn(Enumb jf) throws IOException
     {

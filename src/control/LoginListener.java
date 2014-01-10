@@ -51,6 +51,7 @@ public class LoginListener implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         Object choice = (e.getSource());
+        
         if (choice == logIn)
         {
             main.goFromLogin();

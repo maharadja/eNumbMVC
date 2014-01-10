@@ -36,7 +36,7 @@ public class Game
         ul = fm.readUserFiles();
         languages = fm.readLangFile();
         score = 0;
-        currentLanguage = "engelska";
+     
   
     }
 
@@ -130,6 +130,12 @@ public class Game
             });
             ul.addUser(newUser);
             fm.writeUserFile(newUser);
+            // FIXME raise event
+            // event or item listener.
+            // On the listener OR on the view, add name.addListener()
+            // Main idea:
+            // RELOAD the page ! 
+            
             return true;
         }
         else
