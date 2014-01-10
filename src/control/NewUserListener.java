@@ -9,10 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import model.Game;
+import view.Enumb;
 
 /**
  *
@@ -21,14 +22,18 @@ import model.Game;
 public class NewUserListener implements ActionListener
 {
 
-    private JTextField firstName, lastName;
-    private JPasswordField password, password_2;
+    private JTextField firstName, lastName, password, password_2;
+    ;
+    //private JPasswordField
     private JButton save, cancel;
     private JLabel registerNew, firstNameLabel, lastNameLabel, passwordLabel, passwordLabel_2;
     private JPanel mainPanel;
+    private Enumb main;
+
     private Game game = new Game();
 
-    public NewUserListener(JTextField firstName, JTextField lastName, JPasswordField password, JPasswordField password_2, JButton save, JButton cancel, JLabel registerNew, JLabel firstNameLabel, JLabel lastNameLabel, JLabel passwordLabel, JLabel passwordLabel_2, JPanel mainPanel)
+    public NewUserListener(JTextField firstName, JTextField lastName, JTextField password, JTextField password_2, JButton save, JButton cancel,
+            JLabel registerNew, JLabel firstNameLabel, JLabel lastNameLabel, JLabel passwordLabel, JLabel passwordLabel_2, JPanel mainPanel, Enumb main)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,16 +47,25 @@ public class NewUserListener implements ActionListener
         this.passwordLabel = passwordLabel;
         this.passwordLabel_2 = passwordLabel_2;
         this.mainPanel = mainPanel;
+        this.main = main;
     }
 
-    public void addNewUser(String firstName, String lastName, String password, String passwordRetype)
+    public void addNewUser(String first, String last, String pass, String pass2)
     {
-        if (game.checkPassword(password, passwordRetype))
+
+        if (Parser.validateUserInput(first) == true && Parser.validateUserInput(pass) == true)
         {
 
-            game.addNewUser(firstName, lastName, password, password);
-        }
+            game.addNewUser(first, last, pass, pass2);
+            JOptionPane.showMessageDialog(null, "Registerd");
 
+            main.logOutUser();
+
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "WTF ARE YOU STUPID OR WHAT");
+        }
     }
 
     @Override
@@ -60,11 +74,20 @@ public class NewUserListener implements ActionListener
         Object choice = (e.getSource());
         if (choice == save)
         {
+            String first = this.firstName.getText();
+            String last = this.lastName.getText();
+            String pass = this.password.getText();
+            String pass2 = this.password_2.getText();
+            addNewUser(first, last, pass, pass2);
+            firstName.setText("");
+            lastName.setText("");
+            password.setText("");
+            password_2.setText("");
 
         }
         else if (choice == cancel)
         {
-
+            main.logOutUser();
         }
     }
 

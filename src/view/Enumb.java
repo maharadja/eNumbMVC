@@ -50,7 +50,7 @@ public final class Enumb extends JFrame
         levelOfDifficulty = new LevelOfDifficulty(this);
         gameRun = new GameRun(this, 2);
         result = new Result(this);
-        newUser = new NewUser();
+        newUser = new NewUser(this);
 
         //addNewLanguage = new AddNewLanguage(this);
         JFrame();
@@ -63,6 +63,7 @@ public final class Enumb extends JFrame
         cont.add(chosenLanguage, "3");
         cont.add(levelOfDifficulty, "4");
         cont.add(result, "6");
+        cont.add(newUser, "7");
         add(cont);//adding to extended JFrame
 
         cl.show(cont, "1");

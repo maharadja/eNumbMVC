@@ -27,20 +27,15 @@ public class SignupListener
         this.lastName = lastName;
         this.password = password;
         this.passwordRetype = passwordRetype;
-        
+
         addNewUser(firstName, lastName, password, password);
-        System.out.println(lastName);
         parser = MainFactory.getParser();
         game = parser.getGame();
     }
 
     public void addNewUser(String firstName, String lastName, String password, String passwordRetype)
     {
-        if(game.checkPassword(password, passwordRetype)){ 
-            
-            game.addNewUser(firstName, lastName, password, password);
-        }
-        
+
     }
 
 }

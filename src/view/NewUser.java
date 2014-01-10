@@ -26,13 +26,15 @@ import javax.swing.SwingConstants;
 public class NewUser extends JPanel
 {
 
-    private JTextField firstName, lastName;
-    private JPasswordField password, password_2;
+    private JTextField firstName, lastName, password, password_2;
+    ;
+    //private JPasswordField
     private JButton save, cancel;
     private JLabel registerNew, firstNameLabel, lastNameLabel, passwordLabel, passwordLabel_2;
     private JPanel mainPanel;
+    private Enumb main;
 
-    public NewUser()
+    public NewUser(Enumb jf)
     {
 
         //new JPanels
@@ -50,15 +52,21 @@ public class NewUser extends JPanel
         lastName = new JTextField();
 
         //new PasswordFields
-        password = new JPasswordField();
-        password_2 = new JPasswordField();
+        JTextField password = new JPasswordField();
+        JTextField password_2 = new JPasswordField();
 
         //new JButtons
         save = new JButton("Spara");
         cancel = new JButton("Avbryt");
 
-        NewUserListener listener = new NewUserListener(firstName, lastName, password, password_2, save,
-                cancel, registerNew, firstNameLabel, lastNameLabel, passwordLabel, passwordLabel_2, mainPanel);
+        main = jf;
+
+        NewUserListener listener = new NewUserListener(firstName, lastName, password, password_2, save, cancel,
+                registerNew, firstNameLabel, lastNameLabel, passwordLabel, passwordLabel_2, mainPanel, main);
+
+        //Listeners
+        save.addActionListener(listener);
+        cancel.addActionListener(listener);
 
         //Layout settings
         setLayout(new FlowLayout());

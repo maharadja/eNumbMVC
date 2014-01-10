@@ -4,7 +4,6 @@
  */
 package control;
 
-import java.util.Scanner;
 import model.Game;
 
 /**
@@ -14,7 +13,7 @@ import model.Game;
 public class Parser
 {
 
-    private  Game game;
+    private Game game;
 
     public Parser(Game game)
     {
@@ -24,17 +23,19 @@ public class Parser
     public void getUserList()
     {
         game.getUserList();
-        
+
     }
 
     //Behövs den här? väldigt lik validate answer..
     // Och man kan använda andra metoder för att täcka funktionaliteten
-    public static String validateUserInput(String word)
+    public static boolean validateUserInput(String word)
     {
         String input = cleanUp(word);
-        maxLetters(input);
- 
-        return input;
+        if (maxLetters(input) == true)
+        {
+            return true;
+        }
+        return false;
     }
 
     public static boolean maxLetters(String word)
@@ -48,75 +49,82 @@ public class Parser
 
     public static boolean lookForNumbers(String input)
     {
-        String numbers = "1234567890";      
-        
-        for (int i = 0; i < 10; i++) {
-            if(input.contains(numbers.substring(i,i+1))){
+        String numbers = "1234567890";
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (input.contains(numbers.substring(i, i + 1)))
+            {
                 return false;
-            }  
+            }
         }
         return true;
     }
-    
-    
-    public static String cleanUp(String s){
-        
-          return s.toLowerCase().trim();
-        
+
+    public static String cleanUp(String s)
+    {
+
+        return s.toLowerCase().trim();
+
     }
-    
+
     public static boolean passwordCheck(String password, String retype)
     {
-        if(password.equals(retype)){
+        if (password.equals(retype))
+        {
             return false;
         }
-        else{
+        else
+        {
             return true;
         }
     }
 
     public boolean validateUserName(String name)
     {
-        
+
         String user = cleanUp(name);
-        
-        if((maxLetters(user) && lookForNumbers(name) && game.usernameAvailable(user))){
-           
+
+        if ((maxLetters(user) && lookForNumbers(name) && game.usernameAvailable(user)))
+        {
+
             return true;
         }
-        else{
+        else
+        {
             return false;
         }
-        
-    }
 
+    }
 
     public boolean validateAnswer(String answer, int index)
     {
-        
-        if(maxLetters(answer) && lookForNumbers(answer)){
+
+        if (maxLetters(answer) && lookForNumbers(answer))
+        {
             String word = cleanUp(answer);
             return game.checkWord(index, word);
         }
-        
+
         return false;
     }
 
-    
     public void setGame(String wordSection, String user, int difficultyLevel)
     {
         game.setUserAndList(wordSection, user, difficultyLevel);
     }
 
-    boolean checkIfPasswordCorrect(String user, String password) {
+    boolean checkIfPasswordCorrect(String user, String password)
+    {
 
         game.setUser(user);
         return game.checkPassword(user, password);
-        
+
     }
-    
-    public Game getGame(){
-        
+
+    public Game getGame()
+    {
+
         return game;
     }
 }
