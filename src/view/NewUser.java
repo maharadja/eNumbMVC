@@ -58,8 +58,8 @@ public class NewUser extends JPanel
         lastName = new JTextField();
 
         //new PasswordFields
-        JTextField password = new JPasswordField();
-        JTextField password_2 = new JPasswordField();
+        password = new JPasswordField();
+        password_2 = new JPasswordField();
 
         //new JButtons
         save = new JButton("Spara");

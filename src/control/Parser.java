@@ -79,13 +79,15 @@ public class Parser
             return false;
         }
     }
+
     public static boolean verifyNoEmptyFields(String first, String last, String pass, String passRetype)
     {
-        if(first.isEmpty() || last.isEmpty() || pass.isEmpty() || passRetype.isEmpty()){
+        if (first.isEmpty() || last.isEmpty() || pass.isEmpty() || passRetype.isEmpty())
+        {
             return false;
         }
         return true;
-        
+
     }
 
 //    public boolean validateUserName(String name)
@@ -104,7 +106,6 @@ public class Parser
 //        }
 //
 //    }
-
     public boolean validateAnswer(String answer, int index)
     {
 
@@ -128,12 +129,14 @@ public class Parser
         return game.checkPassword(user, password);
 
     }
+
     public boolean userExists(String first, String last)
     {
         String f = cleanUp(first);
         String l = cleanUp(last);
-        
-        if(game.usernameAvailable(f + " " + l)){
+
+        if (game.usernameAvailable(f + " " + l))
+        {
             return true;
         }
         return false;
@@ -145,11 +148,12 @@ public class Parser
         return game;
     }
 
-    public String firstLetterCapital(String name) {
-        
-        String properName = name.substring(0,1).toUpperCase() + name.substring(1);
-        
+    public String firstLetterCapital(String name)
+    {
+
+        String properName = name.substring(0, 1).toUpperCase() + name.substring(1);
+
         return properName;
-        
+
     }
 }

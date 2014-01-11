@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import view.Enumb;
+import view.Help;
 
 /**
  *
@@ -49,7 +50,7 @@ public class ChosenLanguageListener implements ActionListener
         Object choice = (e.getSource());
         if (choice == help)
         {
-            //main.goFromMenu();
+            Help.display("ChosenLanguage");
         }
         else if (choice == back)
         {

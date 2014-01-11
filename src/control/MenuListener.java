@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import model.Game;
 import view.Enumb;
-import view.MenuHelp;
+import view.Help;
 
 /**
  *
@@ -99,7 +99,7 @@ public class MenuListener implements ActionListener
         }
         else if (choice == help)
         {
-            MenuHelp.display();
+            Help.display("Menu");
         }
     }
 

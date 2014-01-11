@@ -120,6 +120,7 @@ public final class Enumb extends JFrame
         gameRun = new GameRun(this, i);
         cont.add(gameRun, "5");
         cl.show(cont, "5");
+        gameRun.CountDownProgressBar();
         setPreferredSize(new Dimension(1330, 900));
         gameRun.updateUI();
         pack();

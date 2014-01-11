@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package control;
 
 import java.awt.event.ActionEvent;
@@ -16,8 +11,9 @@ import model.UserList;
 import view.Enumb;
 
 /**
+ * This class is for handling the events of a button click for the newUser class When the button is triggred data will be sent to model
  *
- * @author Magnum
+ * @author kevin
  */
 public class NewUserListener implements ActionListener
 {
@@ -32,6 +28,16 @@ public class NewUserListener implements ActionListener
     private Game game;
     private JComboBox<String> name;
 
+    /**
+     *
+     * @param firstName Register firstname textfield
+     * @param lastName Register lastname textfield
+     * @param password Register password textfield
+     * @param password_2 Retyped password textfield
+     * @param save Save button
+     * @param cancel Cancel button
+     * @param main Sets view
+     */
     public NewUserListener(JTextField firstName, JTextField lastName, JTextField password, JTextField password_2, JButton save, JButton cancel, Enumb main)
     {
         this.firstName = firstName;
@@ -46,11 +52,19 @@ public class NewUserListener implements ActionListener
 
     }
 
-    public NewUserListener(JComboBox<String> name)
+    public NewUserListener()
     {
 
     }
 
+    /**
+     * Validates the fields before registering a new user
+     *
+     * @param first Register firstname field
+     * @param last Register lastname field
+     * @param pass Register password field
+     * @param pass2 Retyping password field
+     */
     public void addNewUser(String first, String last, String pass, String pass2)
     {
         if (!Parser.verifyNoEmptyFields(first, last, pass, pass2))
@@ -82,6 +96,9 @@ public class NewUserListener implements ActionListener
 
     }
 
+    /**
+     * Set the registerng fiels empty
+     */
     public void emptyFields()
     {
         firstName.setText("");
@@ -90,9 +107,11 @@ public class NewUserListener implements ActionListener
         password_2.setText("");
     }
 
-    //Behöver kalla på updateList metoden i LogIn,
-    // Behöver göra en password check med, sen är nog registerd delen klar
-    //main.logOutUser();
+    /**
+     * Lister events for button choice
+     *
+     * @param e listener source
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {
