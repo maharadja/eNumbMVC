@@ -214,3 +214,9 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 /nbproject/private/
+/validation-src/BasicDemo/nbproject/private/
+/validation-src/BunchDemo/nbproject/private/
+/validation-src/ValidationAPI/nbproject/private/
+/validation-src/ValidationDemo/nbproject/private/
+/validation-src/maven/target/
+/validation-src/nbstubs/nbproject/private/
