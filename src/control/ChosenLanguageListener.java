@@ -58,7 +58,8 @@ public class ChosenLanguageListener implements ActionListener
         }
         else if (choice == section)
         {
-            main.goFromChosenLanguageToDifficulty();
+            main.goFromChosenLanguageToAddNewSection();
+
         }
     }
 

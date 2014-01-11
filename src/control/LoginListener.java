@@ -7,17 +7,15 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import model.Game;
 import view.Enumb;
 
 /**
+ * This class handles the login actions, and sends the user to the new user section
  *
  * @author kevin
  */
@@ -25,28 +23,31 @@ public class LoginListener implements ActionListener
 {
 
     private final JComboBox<String> name;
-    private final JLabel whatName, whatPassword;
+
     private final JTextField password;
     private final JButton logIn, newUser;
     private final Enumb main;
-    private final JLayeredPane jPane;
-    private BufferedImage buttonIcon;
+
     private Parser parser;
     private Game game;
 
-    public LoginListener(JComboBox<String> name, JLabel whatName, JLabel whatPassword, JTextField password, JButton logIn, JButton newUser, Enumb main, JLayeredPane jPane)
+    /**
+     *
+     * @param name List of registerd users
+     * @param password Enterd password
+     * @param logIn Login button
+     * @param newUser NewUser button
+     * @param main Enumb class
+     */
+    public LoginListener(JComboBox<String> name, JTextField password, JButton logIn, JButton newUser, Enumb main)
     {
         this.name = name;
-        this.whatName = whatName;
-        this.whatPassword = whatPassword;
         this.password = password;
         this.logIn = logIn;
         this.newUser = newUser;
         this.main = main;
-        this.jPane = jPane;
         parser = MainFactory.getParser();
         game = parser.getGame();
-
     }
 
     public LoginListener()
@@ -84,6 +85,11 @@ public class LoginListener implements ActionListener
         }
     }
 
+    /**
+     * Button actions
+     *
+     * @param e When button is triggerd
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {

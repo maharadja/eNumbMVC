@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 /**
  *
  * @author Viktor
@@ -40,7 +41,7 @@ public class ChosenLanguage extends JPanel
         chooseWeekText = new JLabel("Välj vecka:");
         addNewWeekText = new JLabel("Lägg till ny vecka:");
         mascotLabel = new JLabel(new ImageIcon("images\\mouse.png"));
-        mascotBubble = new JLabel(new ImageIcon("images\\prat.png")); 
+        mascotBubble = new JLabel(new ImageIcon("images\\pratsection.png"));
 
         //new Buttons
         help = new JButton("Hjälp");
@@ -55,7 +56,7 @@ public class ChosenLanguage extends JPanel
 
         //new ComboBoxes
         section = new JComboBox();
-        
+
         //new Fonts
         Font font = new Font("century gothic", Font.BOLD, 15);
         Font font2 = new Font("century gothic", Font.BOLD, 20);
@@ -70,33 +71,32 @@ public class ChosenLanguage extends JPanel
         back.setPreferredSize(new Dimension(200, 40));
         addNewWeekText.setPreferredSize(new Dimension(200, 40));
         addNewSection.setPreferredSize(new Dimension(200, 40));
-        chooseWeekText.setPreferredSize(new Dimension(500,50));
+        chooseWeekText.setPreferredSize(new Dimension(500, 50));
         section.setPreferredSize(new Dimension(300, 30));
-        centerPanel.setPreferredSize(new Dimension(500,200));
+        centerPanel.setPreferredSize(new Dimension(500, 200));
         leftPanel.setPreferredSize(new Dimension(250, 900));
         rightPanel.setPreferredSize(new Dimension(250, 900));
-        mascotLabel.setPreferredSize(new Dimension(200,300));
-        mascotBubble.setPreferredSize(new Dimension(500,280));
-        bubblePanel.setPreferredSize(new Dimension(790,290));
+        mascotLabel.setPreferredSize(new Dimension(200, 300));
+        mascotBubble.setPreferredSize(new Dimension(500, 280));
+        bubblePanel.setPreferredSize(new Dimension(790, 290));
 
         //Background settings
         section.setBackground(new Color(255, 255, 255));
-        leftPanel.setBackground(new Color(163,42,15));
-        rightPanel.setBackground(new Color(240,90,40));
+        leftPanel.setBackground(new Color(163, 42, 15));
+        rightPanel.setBackground(new Color(240, 90, 40));
         help.setBackground(new Color(240, 240, 240));
         back.setBackground(new Color(240, 240, 240));
         addNewSection.setBackground(new Color(240, 240, 240));
-        
+
         //Layout settings
         setLayout(new BorderLayout());
-        
+
         //Border settings
         leftPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
         rightPanel.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
         help.setBorder(BorderFactory.createRaisedBevelBorder());
         back.setBorder(BorderFactory.createRaisedBevelBorder());
         addNewSection.setBorder(BorderFactory.createRaisedBevelBorder());
-
 
         //Font settings
         chooseWeekText.setFont(font2);
@@ -105,8 +105,7 @@ public class ChosenLanguage extends JPanel
         addNewWeekText.setFont(font2);
         help.setFont(font);
         back.setFont(font);
-        
-        
+
         //Adding to ComboBox
         GetHandler handler = new GetHandler();
         String[] temp = handler.getWordList();
@@ -119,24 +118,24 @@ public class ChosenLanguage extends JPanel
         //Addings
         bubblePanel.add(Box.createRigidArea(new Dimension(280, 330)));
         bubblePanel.add(mascotBubble);
-        
+
         centerPanel.add(Box.createRigidArea(new Dimension(500, 200)));
         centerPanel.add(chooseWeekText);
         centerPanel.add(section);
-        centerPanel.add(Box.createRigidArea(new Dimension(250,190)));
+        centerPanel.add(Box.createRigidArea(new Dimension(250, 190)));
         centerPanel.add(bubblePanel);
-        
+
         leftPanel.add(Box.createRigidArea(new Dimension(250, 130)));
         leftPanel.add(addNewWeekText);
         leftPanel.add(Box.createRigidArea(new Dimension(250, 0)));
         leftPanel.add(addNewSection);
-        
+
         rightPanel.add(Box.createRigidArea(new Dimension(250, 180)));
         rightPanel.add(help);
         rightPanel.add(Box.createRigidArea(new Dimension(250, 310)));
         rightPanel.add(back);
         rightPanel.add(mascotLabel);
-        
+
         add(leftPanel, BorderLayout.LINE_START);
         add(rightPanel, BorderLayout.LINE_END);
         add(centerPanel, BorderLayout.CENTER);

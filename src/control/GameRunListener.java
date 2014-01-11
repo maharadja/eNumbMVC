@@ -8,11 +8,9 @@ package control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 import view.Enumb;
+import view.Help;
 
 /**
  *
@@ -21,32 +19,20 @@ import view.Enumb;
 public class GameRunListener implements ActionListener
 {
 
+    private JButton help, menu, choiceNr1, choiceNr2, choiceNr3, choiceNr4, fulKnappSomTasBort;
     private Enumb main;
-    private JButton help, menu, fulKnappSomTasBort;
-    private JPanel leftPanel, rightPanel, mainContainer, emptyRightPanel, emptyLeftPanel, emptyBottomPanel;
-    private JLabel topLabel;
-    private JTextField wordToTranslate, translateField, correctNumbersField;
-    private JProgressBar progressBar;
-    private int wordNumber, correctNumbers;
 
-    public GameRunListener(Enumb main, JButton help, JButton menu, JButton fulKnappSomTasBort, JPanel leftPanel, JPanel rightPanel, JPanel emptyRightPanel, JPanel emptyLeftPanel, JPanel emptyBottomPanel, JLabel topLabel, JTextField wordToTranslate, JTextField translateField, JTextField correctNumbersField, JProgressBar progressBar, int wordNumber, int correctNumbers)
+    public GameRunListener(JButton help, JButton menu, JButton choiceNr1, JButton choiceNr2, JButton choiceNr3, JButton choiceNr4, JButton fulKnappSomTasBort, Enumb main)
     {
-        this.main = main;
         this.help = help;
         this.menu = menu;
+        this.choiceNr1 = choiceNr1;
+        this.choiceNr2 = choiceNr2;
+        this.choiceNr3 = choiceNr3;
+        this.choiceNr4 = choiceNr4;
         this.fulKnappSomTasBort = fulKnappSomTasBort;
-        this.leftPanel = leftPanel;
-        this.rightPanel = rightPanel;
-        this.emptyRightPanel = emptyRightPanel;
-        this.emptyLeftPanel = emptyLeftPanel;
-        this.emptyBottomPanel = emptyBottomPanel;
-        this.topLabel = topLabel;
-        this.wordToTranslate = wordToTranslate;
-        this.translateField = translateField;
-        this.correctNumbersField = correctNumbersField;
-        this.progressBar = progressBar;
-        this.wordNumber = wordNumber;
-        this.correctNumbers = correctNumbers;
+        this.main = main;
+
     }
 
     public GameRunListener()
@@ -60,14 +46,33 @@ public class GameRunListener implements ActionListener
         Object choice = (e.getSource());
         if (choice == help)
         {
-            //help window
+            Help.display("GameRun");
         }
         else if (choice == menu)
         {
             main.goFromLogin();
         }
-        else if (choice == fulKnappSomTasBort){
+        else if (choice == fulKnappSomTasBort)
+        {
             main.goFromGameRunToResult();
+        }
+
+        else if (choice == choiceNr1)
+        {
+            JOptionPane.showMessageDialog(null, "Jag fyller ingen funktion 1");
+        }
+        else if (choice == choiceNr1)
+        {
+            JOptionPane.showMessageDialog(null, "Jag fyller ingen funktion 2");
+        }
+
+        else if (choice == choiceNr1)
+        {
+            JOptionPane.showMessageDialog(null, "Jag fyller ingen funktion 3");
+        }
+        else if (choice == choiceNr1)
+        {
+            JOptionPane.showMessageDialog(null, "Jag fyller ingen funktion 4");
         }
     }
 

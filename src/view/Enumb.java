@@ -34,6 +34,7 @@ public final class Enumb extends JFrame
     GameRun gameRun;
     Result result;
     NewUser newUser;
+    AddNewSection addNewSection;
 
     public Enumb() throws IOException
     {
@@ -51,6 +52,7 @@ public final class Enumb extends JFrame
         gameRun = new GameRun(this, 2);
         result = new Result(this);
         newUser = new NewUser(this);
+        addNewSection = new AddNewSection(this);
 
         //addNewLanguage = new AddNewLanguage(this);
         JFrame();
@@ -64,6 +66,7 @@ public final class Enumb extends JFrame
         cont.add(levelOfDifficulty, "4");
         cont.add(result, "6");
         cont.add(newUser, "7");
+        cont.add(addNewSection, "8");
         add(cont);//adding to extended JFrame
 
         cl.show(cont, "1");
@@ -143,6 +146,19 @@ public final class Enumb extends JFrame
         setPreferredSize(new Dimension(512, 690));
         newUser.updateUI();
         pack();
+        setLocationRelativeTo(null);
+    }
+
+    public void goFromChosenLanguageToAddNewSection()
+    {
+        cl.show(cont, "8");
+
+        //addNewSection.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //addNewSection.setResizable(false);
+        setPreferredSize(new Dimension(445, 500));
+        addNewSection.updateUI();
+        pack();
+        //setVisible(true);
         setLocationRelativeTo(null);
     }
 

@@ -18,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.OverlayLayout;
 
 /**
  *
@@ -25,31 +26,34 @@ import javax.swing.JTextField;
  */
 public class Menu extends JPanel
 {
+
     private JTextField newLanguageField;
     private JComboBox<String> chooseLanguage;
     private JButton addNewLanguage, help, quit, next, logOut;
-    private JPanel  containerW, containerE, topLine, centerPanel,bubblePanel;
+    private JPanel containerW, containerE, topLine, centerPanel, bubblePanel, topPanel, bottomPanel;
     private JLabel topHeading, mascotLabel, mascotBubble, flagLabel;
     private Enumb main;
     private MenuListener listener;
 
     public Menu(Enumb jf)
     {
-        
+
         //new textFields
         newLanguageField = new JTextField();
-        
+
         //new Panels
         containerE = new JPanel();
         containerW = new JPanel();
         centerPanel = new JPanel();
         topLine = new JPanel();
         bubblePanel = new JPanel();
+        topPanel = new JPanel();
+        bottomPanel = new JPanel();
 
         //new Labels
-        topHeading = new JLabel(new ImageIcon("images\\globe6.png"));
+        topHeading = new JLabel(new ImageIcon("images\\globe7.png"));
         mascotLabel = new JLabel(new ImageIcon("images\\mouse.png"));
-        mascotBubble = new JLabel(new ImageIcon("images\\prat.png"));
+        mascotBubble = new JLabel(new ImageIcon("images\\pratmenu.png"));
         flagLabel = new JLabel(new ImageIcon("images\\engelska.png"));
 
         //new Buttons
@@ -68,18 +72,27 @@ public class Menu extends JPanel
         main = jf;
 
         //MenuListern
-        listener = new MenuListener(flagLabel, chooseLanguage, 
-                addNewLanguage, help, quit, next, logOut, containerW, 
-                containerE, topLine, topHeading, main, newLanguageField);
-        
+        listener = new MenuListener(newLanguageField, addNewLanguage, help, quit, next, logOut,
+                main, chooseLanguage, flagLabel);
+
+        //Adding ActionListeners
+        addNewLanguage.addActionListener(listener);
+        quit.addActionListener(listener);
+        next.addActionListener(listener);
+        chooseLanguage.addActionListener(listener);
+        help.addActionListener(listener);
+        logOut.addActionListener(listener);
+
         //Size settings.
         containerE.setPreferredSize(new Dimension(250, 900));
         containerW.setPreferredSize(new Dimension(250, 900));
-        centerPanel.setPreferredSize(new Dimension(790,890));
-        topHeading.setPreferredSize(new Dimension(790,700));
-        bubblePanel.setPreferredSize(new Dimension(790,300));
-        mascotLabel.setPreferredSize(new Dimension(200,300));
-        mascotBubble.setPreferredSize(new Dimension(500,280));
+        centerPanel.setPreferredSize(new Dimension(790, 890));
+        topHeading.setPreferredSize(new Dimension(790, 500));
+
+        bubblePanel.setPreferredSize(new Dimension(700, 250));
+        mascotLabel.setPreferredSize(new Dimension(200, 300));
+        mascotBubble.setPreferredSize(new Dimension(500, 280));
+
         flagLabel.setPreferredSize(new Dimension(250, 150));
         chooseLanguage.setPreferredSize(new Dimension(200, 30));
         newLanguageField.setPreferredSize(new Dimension(200, 30));
@@ -88,10 +101,12 @@ public class Menu extends JPanel
         quit.setPreferredSize(new Dimension(200, 40));
         next.setPreferredSize(new Dimension(200, 40));
         logOut.setPreferredSize(new Dimension(200, 40));
-        
+
         //Background settings.
         containerE.setBackground(new Color(17, 54, 56));
         containerW.setBackground(new Color(184, 101, 0));
+        topPanel.setBackground(new Color(184, 101, 0));
+        bottomPanel.setBackground(new Color(17, 54, 56));
         chooseLanguage.setBackground(new Color(255, 255, 255));
         quit.setBackground(new Color(240, 240, 240));
         help.setBackground(new Color(240, 240, 240));
@@ -109,7 +124,7 @@ public class Menu extends JPanel
         logOut.setBorder(BorderFactory.createRaisedBevelBorder());
         containerW.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
         containerE.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
- 
+
         //Font settings
         chooseLanguage.setFont(font);
         quit.setFont(font);
@@ -120,34 +135,23 @@ public class Menu extends JPanel
 
         //Layout settings.
         setLayout(new BorderLayout());
+        bubblePanel.setLayout(new OverlayLayout(bubblePanel));
 
-        //Adding ActionListeners
-        addNewLanguage.addActionListener(listener);
-        quit.addActionListener(listener);
-        next.addActionListener(listener);
-        chooseLanguage.addActionListener(listener);
-        help.addActionListener(listener);
-        logOut.addActionListener(listener);
-        
-
-       
-        
         //Adding to bubblePanel
-        bubblePanel.add(Box.createRigidArea(new Dimension(280, 330)));
+        bubblePanel.add(Box.createRigidArea(new Dimension(390, 200)));
         bubblePanel.add(mascotBubble);
-        
-        
+
         //Adding to centerPanel
-        centerPanel.add(Box.createRigidArea(new Dimension(790, 70)));
+        centerPanel.add(Box.createRigidArea(new Dimension(790, 120)));
         centerPanel.add(topHeading);
-        centerPanel.add(Box.createRigidArea(new Dimension(90,-200)));
+        centerPanel.add(Box.createRigidArea(new Dimension(90, 80)));
         centerPanel.add(bubblePanel);
-        
+
         //Adding to WEST container.
-        containerW.add(Box.createRigidArea(new Dimension(250,5)));
+        containerW.add(Box.createRigidArea(new Dimension(250, 5)));
         containerW.add(flagLabel);
         containerW.add(chooseLanguage);
-        
+
         containerW.add(next);
         containerW.add(Box.createRigidArea(new Dimension(250, 257)));
         containerW.add(newLanguageField);
@@ -162,16 +166,15 @@ public class Menu extends JPanel
         containerE.add(mascotLabel);
 
         //Adding to main container.
+        //add(topPanel, BorderLayout.PAGE_START);
+        //add(bottomPanel, BorderLayout.PAGE_END);
         add(centerPanel, BorderLayout.CENTER);
         add(containerW, BorderLayout.LINE_START);
         add(containerE, BorderLayout.LINE_END);
-        
-        
+
         //Adding to comboBox
         listener.setDropDown();
 
     }
-    
-    
 
 }

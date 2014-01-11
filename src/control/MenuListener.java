@@ -7,7 +7,11 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import model.Game;
 import view.Enumb;
 import view.Help;
@@ -19,41 +23,78 @@ import view.Help;
 public class MenuListener implements ActionListener
 {
 
-    private JComboBox<String> chooseLanguage;
+    private JTextField newLanguageField;
     private JButton addNewLanguage, help, quit, next, logOut;
-    private JPanel container, containerW, containerE, topLine;
-    private JLabel topHeading, flagLabel;
     private Enumb main;
     private Parser parser;
     private Game game;
-    private JTextField newLanguageField;
+    private JComboBox<String> chooseLanguage;
+    private JLabel flagLabel;
 
-    public MenuListener(JLabel flagLabel, JComboBox<String> chooseLanguage, JButton addNewLanguage, JButton help, JButton quit, JButton next, JButton logOut,
-            JPanel containerW, JPanel containerE, JPanel topLine, JLabel topHeading,
-            Enumb main, JTextField newLanguageField)
+    public MenuListener(JTextField newLanguageField, JButton addNewLanguage, JButton help, JButton quit, JButton next, JButton logOut, Enumb main, JComboBox<String> chooseLanguage, JLabel flagLabel)
     {
-        this.chooseLanguage = chooseLanguage;
+        this.newLanguageField = newLanguageField;
         this.addNewLanguage = addNewLanguage;
         this.help = help;
         this.quit = quit;
         this.next = next;
         this.logOut = logOut;
-        this.container = container;
-        this.containerW = containerW;
-        this.containerE = containerE;
-        this.topHeading = topHeading;
-        this.flagLabel = flagLabel;
         this.main = main;
-        this.newLanguageField = newLanguageField;
-
+        this.chooseLanguage = chooseLanguage;
+        this.flagLabel = flagLabel;
         parser = MainFactory.getParser();
         game = parser.getGame();
-
     }
 
     public MenuListener()
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private boolean languageAvailable(String inputLang)
+    {
+
+        if (parser.validateUserInput(inputLang))
+        {
+            String lang = parser.cleanUp(inputLang);
+            String[] langs = game.getListOfLanguages();
+            for (int i = 0; i < langs.length; i++)
+            {
+                if (langs[i].equals(lang))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public String[] getLanguages()
+    {
+
+        String[] languages = game.getListOfLanguages();
+        String[] langWithCaps = new String[languages.length];
+
+        for (int i = 0; i < languages.length; i++)
+        {
+            langWithCaps[i] = parser.firstLetterCapital(languages[i]);
+        }
+        return langWithCaps;
+    }
+
+    public void setDropDown()
+    {
+
+        chooseLanguage.removeAllItems();
+
+        String[] langs = getLanguages();
+
+        for (String s : langs)
+        {
+
+            chooseLanguage.addItem(s);
+        }
+
     }
 
     @Override
@@ -101,52 +142,6 @@ public class MenuListener implements ActionListener
         {
             Help.display("Menu");
         }
-    }
-
-    private boolean languageAvailable(String inputLang)
-    {
-
-        if (parser.validateUserInput(inputLang))
-        {
-            String lang = parser.cleanUp(inputLang);
-            String[] langs = game.getListOfLanguages();
-            for (int i = 0; i < langs.length; i++)
-            {
-                if (langs[i].equals(lang))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public String[] getLanguages()
-    {
-
-        String[] languages = game.getListOfLanguages();
-        String[] langWithCaps = new String[languages.length];
-
-        for (int i = 0; i < languages.length; i++)
-        {
-            langWithCaps[i] = parser.firstLetterCapital(languages[i]);
-        }
-        return langWithCaps;
-    }
-
-    public void setDropDown()
-    {
-
-        chooseLanguage.removeAllItems();
-
-        String[] langs = getLanguages();
-
-        for (String s : langs)
-        {
-
-            chooseLanguage.addItem(s);
-        }
-
     }
 
 }

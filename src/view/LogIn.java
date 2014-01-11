@@ -60,7 +60,11 @@ public class LogIn extends JPanel
         main = jf;
 
         //LoginListener
-        LoginListener listener = new LoginListener(name, whatName, whatPassword, password, logIn, newUser, main, jPane);
+        LoginListener listener = new LoginListener(name, password, logIn, newUser, main);
+
+        //adding ActionListeners
+        logIn.addActionListener(listener);
+        newUser.addActionListener(listener);
 
         //size settings
         setPreferredSize(new Dimension(512, 680));
@@ -83,10 +87,6 @@ public class LogIn extends JPanel
 
         //layout settings
         setLayout(new FlowLayout());
-
-        //adding ActionListeners
-        logIn.addActionListener(listener);
-        newUser.addActionListener(listener);
 
         //Cursor settings.
         name.setCursor(new Cursor(HAND_CURSOR));
