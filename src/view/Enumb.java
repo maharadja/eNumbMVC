@@ -49,10 +49,11 @@ public final class Enumb extends JFrame
         menu = new Menu(this);
         chosenLanguage = new ChosenLanguage(this);
         levelOfDifficulty = new LevelOfDifficulty(this);
-        gameRun = new GameRun(this, 2);
+        gameRun = new GameRun(this, 3);
         result = new Result(this);
         newUser = new NewUser(this);
         addNewSection = new AddNewSection(this);
+        
 
         //addNewLanguage = new AddNewLanguage(this);
         JFrame();
@@ -66,7 +67,6 @@ public final class Enumb extends JFrame
         cont.add(levelOfDifficulty, "4");
         cont.add(result, "6");
         cont.add(newUser, "7");
-        cont.add(addNewSection, "8");
         add(cont);//adding to extended JFrame
 
         cl.show(cont, "1");
@@ -123,7 +123,6 @@ public final class Enumb extends JFrame
         gameRun = new GameRun(this, i);
         cont.add(gameRun, "5");
         cl.show(cont, "5");
-        gameRun.CountDownProgressBar();
         setPreferredSize(new Dimension(1330, 900));
         gameRun.updateUI();
         pack();
@@ -151,15 +150,14 @@ public final class Enumb extends JFrame
 
     public void goFromChosenLanguageToAddNewSection()
     {
-        cl.show(cont, "8");
-
-        //addNewSection.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //addNewSection.setResizable(false);
-        setPreferredSize(new Dimension(445, 500));
-        addNewSection.updateUI();
-        pack();
-        //setVisible(true);
-        setLocationRelativeTo(null);
+        
+        addNewSection.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        addNewSection.setPreferredSize(new Dimension(540, 475));
+        addNewSection.update(null);
+        addNewSection.setUndecorated(true);
+        addNewSection.setVisible(true);
+        addNewSection.pack();
+        addNewSection.setLocationRelativeTo(null);
     }
 
     public void logOutUser()

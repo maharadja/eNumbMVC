@@ -5,11 +5,15 @@
  */
 package view;
 
+import control.AddNewSectionListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -19,36 +23,40 @@ import javax.swing.SwingConstants;
  *
  * @author Adrian
  */
-public class AddNewSection extends JPanel
+public class AddNewSection extends JFrame
 {
 
     private final JLabel fromWord, toWord, no0, no1, no2, no3, no4, no5, no6, no7, no8, no9, no10, no11;
-    private final JPanel container;
+    private final JPanel leftContainer, emptyRightContainer, mainContainer, numberContainer;
     private final JTextField xWord1, xWord2, xWord3, xWord4, xWord5, xWord6, xWord7, xWord8, xWord9, xWord10;
     private final JTextField yWord1, yWord2, yWord3, yWord4, yWord5, yWord6, yWord7, yWord8, yWord9, yWord10;
     private final JButton back, addNewWords;
+    private final Enumb main;
 
     public AddNewSection(Enumb jf)
     {
 
         //labels
         fromWord = new JLabel("Ord på svenska:");
-        toWord = new JLabel("Ord på främmande språk:");
+        toWord = new JLabel("Ord på det nya språket:");
         no0 = new JLabel("");
-        no1 = new JLabel("1.");
-        no2 = new JLabel("2.");
-        no3 = new JLabel("3.");
-        no4 = new JLabel("4.");
-        no5 = new JLabel("5.");
-        no6 = new JLabel("6.");
-        no7 = new JLabel("7.");
-        no8 = new JLabel("8.");
-        no9 = new JLabel("9.");
+        no1 = new JLabel(" 1.");
+        no2 = new JLabel(" 2.");
+        no3 = new JLabel(" 3.");
+        no4 = new JLabel(" 4.");
+        no5 = new JLabel(" 5.");
+        no6 = new JLabel(" 6.");
+        no7 = new JLabel(" 7.");
+        no8 = new JLabel(" 8.");
+        no9 = new JLabel(" 9.");
         no10 = new JLabel("10.");
         no11 = new JLabel("");
 
         //panels
-        container = new JPanel(new FlowLayout());
+        mainContainer = new JPanel(new FlowLayout());
+        leftContainer = new JPanel(new GridLayout(12, 2, 5, 5));
+        emptyRightContainer = new JPanel();
+        numberContainer = new JPanel(new GridLayout(12, 1, 0, 5));
 
         //buttons
         back = new JButton("Tillbaka");
@@ -82,7 +90,10 @@ public class AddNewSection extends JPanel
         Font font = new Font("Century Gothic", Font.BOLD, 15);
 
         //set size
-        container.setPreferredSize(new Dimension(445, 500));
+        numberContainer.setPreferredSize(new Dimension(20, 440));
+        mainContainer.setPreferredSize(new Dimension(480, 480));
+        leftContainer.setPreferredSize(new Dimension(430, 440));
+        emptyRightContainer.setPreferredSize(new Dimension(20, 440));
         fromWord.setPreferredSize(new Dimension(200, 30));
         no0.setPreferredSize(new Dimension(30, 30));
         no1.setPreferredSize(new Dimension(30, 30));
@@ -121,7 +132,7 @@ public class AddNewSection extends JPanel
         addNewWords.setPreferredSize(new Dimension(200, 30));
 
         //set font
-        container.setFont(font);
+        leftContainer.setFont(font);
         fromWord.setFont(font);
         no0.setFont(font);
         no1.setFont(font);
@@ -159,52 +170,69 @@ public class AddNewSection extends JPanel
         back.setFont(font);
         addNewWords.setFont(font);
 
+        main = jf;
+
+        AddNewSectionListener listener = new AddNewSectionListener(back, addNewWords, main);
+
+        //Adding ActionListeners
+        back.addActionListener(listener);
+        addNewWords.addActionListener(listener);
+
+        //Border settings¨
+        mainContainer.setBorder(BorderFactory.createRaisedBevelBorder());
+
         //set backgrounds
         setBackground(new Color(15, 161, 163));
-        container.setBackground(new Color(15, 161, 163));
+        mainContainer.setBackground(new Color(15, 161, 163));
+        numberContainer.setBackground(new Color(15, 161, 163));
+        leftContainer.setBackground(new Color(15, 161, 163));
 
         //set alignment
         fromWord.setHorizontalAlignment(SwingConstants.CENTER);
         toWord.setHorizontalAlignment(SwingConstants.CENTER);
 
         //Addings
-        container.add(no0);
-        container.add(fromWord);
-        container.add(toWord);
-        container.add(no1);
-        container.add(xWord1);
-        container.add(yWord1);
-        container.add(no2);
-        container.add(xWord2);
-        container.add(yWord2);
-        container.add(no3);
-        container.add(xWord3);
-        container.add(yWord3);
-        container.add(no4);
-        container.add(xWord4);
-        container.add(yWord4);
-        container.add(no5);
-        container.add(xWord5);
-        container.add(yWord5);
-        container.add(no6);
-        container.add(xWord6);
-        container.add(yWord6);
-        container.add(no7);
-        container.add(xWord7);
-        container.add(yWord7);
-        container.add(no8);
-        container.add(xWord8);
-        container.add(yWord8);
-        container.add(no9);
-        container.add(xWord9);
-        container.add(yWord9);
-        container.add(no10);
-        container.add(xWord10);
-        container.add(yWord10);
-        container.add(no11);
-        container.add(back);
-        container.add(addNewWords);
-        add(container);
+        numberContainer.add(no0);
+        numberContainer.add(no1);
+        numberContainer.add(no2);
+        numberContainer.add(no3);
+        numberContainer.add(no4);
+        numberContainer.add(no5);
+        numberContainer.add(no6);
+        numberContainer.add(no7);
+        numberContainer.add(no8);
+        numberContainer.add(no9);
+        numberContainer.add(no10);
+        numberContainer.add(no11);
+
+        leftContainer.add(fromWord);
+        leftContainer.add(toWord);
+        leftContainer.add(xWord1);
+        leftContainer.add(yWord1);
+        leftContainer.add(xWord2);
+        leftContainer.add(yWord2);
+        leftContainer.add(xWord3);
+        leftContainer.add(yWord3);
+        leftContainer.add(xWord4);
+        leftContainer.add(yWord4);
+        leftContainer.add(xWord5);
+        leftContainer.add(yWord5);
+        leftContainer.add(xWord6);
+        leftContainer.add(yWord6);
+        leftContainer.add(xWord7);
+        leftContainer.add(yWord7);
+        leftContainer.add(xWord8);
+        leftContainer.add(yWord8);
+        leftContainer.add(xWord9);
+        leftContainer.add(yWord9);
+        leftContainer.add(xWord10);
+        leftContainer.add(yWord10);
+        leftContainer.add(back);
+        leftContainer.add(addNewWords);
+        mainContainer.add(numberContainer);
+        mainContainer.add(leftContainer);
+        //mainContainer.add(emptyRightContainer);
+        add(mainContainer);
 
     }
 

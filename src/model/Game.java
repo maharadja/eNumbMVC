@@ -155,8 +155,7 @@ public class Game
 
     public WordList getWordList(String fileName)
     {
-        getwordSections(currentLanguage);
-
+        
         for (WordList w : tempWordSections)
         {
 
@@ -223,7 +222,7 @@ public class Game
 
     public void setUserAndList(String wordSection, String user, int level)
     {
-
+        
         tempWordlist = getWordList(wordSection);
         tempUser = getUser(user);
 
@@ -259,7 +258,6 @@ public class Game
 
     public String[] getWord(int index)
     {
-
         return tempWordlist.getWord(index);
     }
 
@@ -320,6 +318,17 @@ public class Game
 
         tempUser = ul.getUser(user);
 
+    }
+    
+    public void setChosenLanguage(String lang){
+        
+        tempWordSections = fm.getAllListsOfLang(lang);
+           
+    }
+    
+    public void setTempLang(String lang){
+        
+        tempLang = lang;
     }
 
 }

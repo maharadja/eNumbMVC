@@ -143,10 +143,10 @@ public class GameRun extends JPanel
         correctNumbersField.setBackground(Color.WHITE);
 
         //Border settings
-        //choiceNr1.setBorder(BorderFactory.createRaisedBevelBorder());
-        //choiceNr2.setBorder(BorderFactory.createRaisedBevelBorder());
-        //choiceNr3.setBorder(BorderFactory.createRaisedBevelBorder());
-        //choiceNr4.setBorder(BorderFactory.createRaisedBevelBorder());
+        choiceNr1.setBorder(BorderFactory.createRaisedBevelBorder());
+        choiceNr2.setBorder(BorderFactory.createRaisedBevelBorder());
+        choiceNr3.setBorder(BorderFactory.createRaisedBevelBorder());
+        choiceNr4.setBorder(BorderFactory.createRaisedBevelBorder());
         mascotBubble.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
         bubblePanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLUE));
         buttonPanel.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.MAGENTA));
@@ -207,6 +207,7 @@ public class GameRun extends JPanel
         }
         else if (level == 1)
         {
+            CountDownProgressBar();
             leftPanel.add(Box.createRigidArea(new Dimension(66, 110)));
             leftPanel.add(outerButtonPanel);
             leftPanel.add(Box.createRigidArea(new Dimension(1000, 0)));
@@ -217,7 +218,8 @@ public class GameRun extends JPanel
 
         }
         else if (level == 2)
-        {
+        {   
+            CountDownProgressBar();
             leftPanel.add(translateFieldLabel);
             leftPanel.add(translateField);
             updateUI();

@@ -65,11 +65,12 @@ public class NewUserListener implements ActionListener
      * @param pass Register password field
      * @param pass2 Retyping password field
      */
-    public void addNewUser(String first, String last, String pass, String pass2)
+    public boolean addNewUser(String first, String last, String pass, String pass2)
     {
         if (!Parser.verifyNoEmptyFields(first, last, pass, pass2))
         {
             JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda");
+            return false;
         }
         else if (!Parser.validateUserInput(first) == true && Parser.validateUserInput(last))
         {
@@ -92,8 +93,9 @@ public class NewUserListener implements ActionListener
             game.addNewUser(first, last, pass, pass);
             JOptionPane.showMessageDialog(null, "Grattis, du är nu registrerad användare i eNumb");
             main.logOutUser();
+            return true;
         }
-
+        return false;
     }
 
     /**
@@ -122,11 +124,18 @@ public class NewUserListener implements ActionListener
             String last = this.lastName.getText();
             String pass = this.password.getText();
             String pass2 = this.password_2.getText();
-            addNewUser(first, last, pass, pass2);
+            if (addNewUser(first, last, pass, pass2))
+            {
+                main.logOutUser();
+            }
+            else
+            {
+                main.goFromLoginToNewUser();
+            }
             //updates the userlist
             emptyFields();
-            main.logOutUser();
 
+            //main.logOutUser();
         }
         else if (choice == cancel)
         {

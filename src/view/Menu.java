@@ -166,8 +166,8 @@ public class Menu extends JPanel
         containerE.add(mascotLabel);
 
         //Adding to main container.
-        //add(topPanel, BorderLayout.PAGE_START);
-        //add(bottomPanel, BorderLayout.PAGE_END);
+        add(topPanel, BorderLayout.PAGE_START);
+        add(bottomPanel, BorderLayout.PAGE_END);
         add(centerPanel, BorderLayout.CENTER);
         add(containerW, BorderLayout.LINE_START);
         add(containerE, BorderLayout.LINE_END);

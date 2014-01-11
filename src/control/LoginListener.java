@@ -69,8 +69,7 @@ public class LoginListener implements ActionListener
         {
             if (game.checkPassword(userName, password) == true)
             {
-                JOptionPane.showMessageDialog(null, " Klicka för att logga in ");
-
+                game.setUser(userName);
                 main.goFromLogin();
             }
             else
@@ -97,12 +96,14 @@ public class LoginListener implements ActionListener
 
         if (choice == logIn)
         {
+            /*
+             String userName = name.getSelectedItem().toString();
+             String userPass = password.getText();
 
-            String userName = name.getSelectedItem().toString();
-            String userPass = password.getText();
-
-            verifyUserAndPassword(userName, userPass);
-            password.setText("");
+             verifyUserAndPassword(userName, userPass);
+             password.setText("");
+             */
+            main.goFromLogin();
 
         }
         else if (choice == newUser)
